@@ -1,0 +1,27 @@
+#menuOutBox {
+    background-color: white;
+    width: 20%;
+    height: 100%;
+    border-right: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.menu-list {
+    padding: 10px;
+}
+
+.menu-item {
+    color: rgba(1, 1, 1, 0.8);
+    font-size: 16px;
+    line-height: 1.2;
+    border-radius: 3px;
+    padding: 11px 3px;
+}
+
+.menu-item span{
+    padding: 0 3px;
+}
+
+.menu-item:hover {
+    background-color: whitesmoke;
+    cursor: pointer;
+}

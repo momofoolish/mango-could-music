@@ -1,0 +1,12 @@
+#home {
+    width: 100vw;
+    height: 100vh;
+}
+
+.home-center {
+    display: flex;
+}
+
+.home-bottom {
+    border-top: 1px solid rgba(128, 128, 128, 0.5);
+}

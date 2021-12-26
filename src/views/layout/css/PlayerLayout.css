@@ -1,0 +1,9 @@
+#playerOutBox {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.palyer-center{
+    text-align: center;
+}
