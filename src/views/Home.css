@@ -10,3 +10,42 @@
 .home-bottom {
     border-top: 1px solid rgba(128, 128, 128, 0.5);
 }
+
+
+/* 公有样式 */
+.icon-single-size {
+    font-size: 18px;
+}
+
+.color-single-hover:hover {
+    cursor: pointer;
+    color: hotpink;
+}
+
+.border-single-radius {
+    border-radius: 6px;
+}
+
+.margin-left-single {
+    margin-left: 6px;
+}
+
+.font-size-small {
+    font-size: 12px;
+}
+
+.font-size-large {
+    font-size: 18px;
+}
+
+.margin-top-large {
+    margin-top: 1em;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.padding-large {
+    padding: 1em;
+}

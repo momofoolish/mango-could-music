@@ -1,9 +1,9 @@
 import React from 'react';
 import MenuLayout from './layout/MenuLayout';
-import MusicLayout from './layout/MusicLayout';
 import './Home.css';
 import 'antd/dist/antd.css';
 import PlayerLayout from './layout/PlayerLayout';
+import MainLayout from './layout/MainLayout';
 
 /**
  * 主页
@@ -13,7 +13,7 @@ function Home() {
         <div id='home'>
             <div className='home-center'>
                 <MenuLayout />
-                <MusicLayout />
+                <MainLayout />
             </div>
 
             <div className='home-bottom'>

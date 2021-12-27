@@ -1,9 +1,81 @@
 #playerOutBox {
+    height: 98px;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-.palyer-center{
+
+.player-center {
+    width: 50%;
     text-align: center;
+}
+
+.player-center-progress {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.player-center-progress span {
+    padding: 3px;
+}
+
+.player-center-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-center-control-preview {
+    margin-right: 1.5em;
+}
+
+.player-center-control-next {
+    margin-left: 1.5em;
+}
+
+.player-center-control-play-type {
+    margin-right: 1.5em;
+}
+
+.player-center-control-play-type:hover {
+    cursor: pointer;
+    color: hotpink;
+}
+
+
+.player-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-left-img {
+    margin-right: 1em;
+    border-radius: 6px;
+}
+
+.player-left-music-info {
+    padding: 1em;
+}
+
+.player-left-music-info-name {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.player-left-music-info-singer {
+    font-size: 14px;
+}
+
+
+.player-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.palyer-right-sound {
+    margin-right: 1em;
 }
