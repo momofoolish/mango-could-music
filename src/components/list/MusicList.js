@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/MusicList.css';
-import { Input, Table, Tag, Space } from 'antd';
+import { Input, Table, Space } from 'antd';
 import data from '../../test-data/music-list-data';
 
 const { Search } = Input;
@@ -40,48 +40,31 @@ function MusicList() {
  */
 const columns = [
     {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <a>{text}</a>,
+        title: '标题',
+        dataIndex: 'title',
+        key: 'title',
     },
     {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
+        title: '歌手',
+        dataIndex: 'singer',
+        key: 'singer',
     },
     {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
+        title: '专辑',
+        dataIndex: 'album',
+        key: 'album',
     },
     {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: tags => (
-            <>
-                {tags.map(tag => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </>
-        ),
+        title: '时间',
+        key: 'time',
+        dataIndex: 'time',
     },
     {
-        title: 'Action',
+        title: '操作',
         key: 'action',
         render: (text, record) => (
             <Space size="middle">
-                <a>Invite {record.name}</a>
-                <a>Delete</a>
+                <a>收藏 {record.id}</a>
             </Space>
         ),
     },

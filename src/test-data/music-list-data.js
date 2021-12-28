@@ -1,31 +1,31 @@
 const data = [
     {
         key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
+        title: 'John Brown',
+        singer: 'singer',
+        album: 'New York No. 1 Lake Park',
+        time: '2021-10-11'
     },
     {
         key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
+        title: 'Jim Green',
+        singer: 'singer',
+        album: 'London No. 1 Lake Park',
+        time: '2021-10-11'
     },
     {
         key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
+        title: 'Joe Black',
+        singer: 'singer',
+        album: 'Skeyney No. 1 Lake Park',
+        time: '2021-10-11'
     },
     {
         key: '4',
-        name: 'Joe Jo',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
+        title: 'Joe Jo',
+        singer: 'singer',
+        album: 'Skeyney No. 1 Lake Park',
+        time: '2021-10-11'
     },
 ];
 
