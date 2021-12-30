@@ -1,0 +1,8 @@
+.music-history-control{
+    display: flex;
+    justify-content: space-between;
+}
+
+.music-history-control span{
+    margin-left: 3px;
+}

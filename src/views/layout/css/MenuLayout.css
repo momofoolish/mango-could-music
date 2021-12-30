@@ -39,3 +39,9 @@
     padding: 11px 3px;
     background-color: rgba(0,0,122,0.5);
 }
+
+
+/* 退出对话框 */
+.exit-popover-cancel{
+    margin-left: 3px;
+}

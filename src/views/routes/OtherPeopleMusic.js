@@ -1,12 +1,15 @@
 import React from "react";
 import SongSheetList from "../../components/list/SongSheetList";
 
-function HomeRoute() {
+/**
+ * 其他人的乐库页
+ */
+function OtherPeopleMusic() {
     return (
-        <div id="homeOutBox">
+        <div id="otherPeopleOutBox">
             <SongSheetList />
         </div>
     )
 }
 
-export default HomeRoute;
+export default OtherPeopleMusic;
