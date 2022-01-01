@@ -5,6 +5,8 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "antd": "^4.17.4",
+    "electron": "^16.0.5",
+    "node-id3": "^0.2.3",
     "react": "^16.10.0",
     "react-dom": "^16.10.0",
     "react-scripts": "3.1.2"
@@ -33,7 +35,6 @@
     ]
   },
   "devDependencies": {
-    "electron": "^6.0.10",
     "electron-packager": "^14.0.6",
     "react-router-dom": "^6.2.1"
   },

@@ -1,14 +1,13 @@
 import React from 'react';
 import './css/MusicList.css';
 import { Input, Table, Space } from 'antd';
-import data from '../../test-data/music-list-data';
 
 const { Search } = Input;
 
 /**
  * 音乐列表
  */
-function MusicList() {
+function MusicList(props) {
     /**
      * 搜索回调函数
      */
@@ -29,7 +28,7 @@ function MusicList() {
             </div>
             {/* 这里是列表 */}
             <div className='music-list-data'>
-                <Table columns={columns} dataSource={data} pagination={false} />
+                <Table columns={columns} dataSource={props.musicSource} pagination={false} />
             </div>
         </div>
     )
@@ -43,21 +42,30 @@ const columns = [
         title: '标题',
         dataIndex: 'title',
         key: 'title',
+        ellipsis: {
+            showTitle: false,
+        }
     },
     {
         title: '歌手',
         dataIndex: 'singer',
         key: 'singer',
+        ellipsis: {
+            showTitle: false,
+        }
     },
     {
         title: '专辑',
         dataIndex: 'album',
         key: 'album',
+        ellipsis: {
+            showTitle: false,
+        }
     },
     {
-        title: '时间',
-        key: 'time',
-        dataIndex: 'time',
+        title: '大小',
+        key: 'size',
+        dataIndex: 'size',
     },
     {
         title: '操作',
@@ -65,6 +73,7 @@ const columns = [
         render: (text, record) => (
             <Space size="middle">
                 <a>收藏 {record.id}</a>
+                <a>移除 {record.id}</a>
             </Space>
         ),
     },

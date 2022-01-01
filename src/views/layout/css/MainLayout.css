@@ -2,6 +2,7 @@
     width: 100%;
     height: 512px;
     padding: 1em;
+    overflow: auto;
 }
 
 /* 设置滚动条的样式 */
