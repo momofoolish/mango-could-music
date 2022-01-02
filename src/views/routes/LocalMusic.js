@@ -1,10 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import MusicList from "../../components/list/MusicList";
 import { Button, Popover } from 'antd';
-import { ImportOutlined, ReloadOutlined,LoadingOutlined } from '@ant-design/icons';
+import { ImportOutlined, ReloadOutlined, LoadingOutlined } from '@ant-design/icons';
 import './css/LocalMusic.css';
+import jsMd5 from 'js-md5';
 
-const IMPORT_TYPE = [{ code: 0, message: '导入文件' }, { code: 1, message: '导入文件夹' }]
+// 导入类型常量
+const IMPORT_TYPE = [{ code: 0, message: '导入文件' }, { code: 1, message: '导入文件夹' }];
+// 本地音乐缓存键
+const LOCAL_MUSIC_KEY = 'localMusic';
 
 /**
  * 本地音乐页
@@ -21,7 +25,7 @@ function LocalMusic() {
     const onImportClick = (importType) => {
         setLoading(true);
         let option;
-        let musicData = musicList.map(item => item);
+        let musicData = [...musicList];
         let paths;
         // 操作类型判断
         if (importType === IMPORT_TYPE[0].code) {
@@ -54,7 +58,7 @@ function LocalMusic() {
                 let info = window.electron.readMediaProp(paths[i]);
                 let stats = window.electron.statSync(paths[i]);
                 let musicInfo = {
-                    key: paths[i],
+                    key: jsMd5(paths[i] + new Date().getTime()),
                     title: info.title,
                     singer: info.artist,
                     album: info.album ? info.album : info.title,
@@ -64,8 +68,28 @@ function LocalMusic() {
             }
             setMusicList(musicData);
             setLoading(false);
+            // 缓存到本地
+            localStorage.setItem(LOCAL_MUSIC_KEY, JSON.stringify(musicData));
         }, 200);
     }
+
+    /**
+     * 组件生命周期
+     */
+    useEffect(() => {
+        let list = localStorage.getItem(LOCAL_MUSIC_KEY);
+        setMusicList(list ? JSON.parse(list) : []);
+    }, []);
+
+    /**
+     * 移除一首本地歌曲
+     * @param {String} key 
+     */
+    const handleDelete = (key) => {
+        let dataSource = musicList.filter((item) => item.key !== key);
+        setMusicList(dataSource);
+        localStorage.setItem(LOCAL_MUSIC_KEY, JSON.stringify(dataSource));
+    };
 
     return (
         <div id="localMusicOutBox">
@@ -79,7 +103,7 @@ function LocalMusic() {
                     <Button type="primary" shape="round">
                         <span>导入本地</span>
                         <ImportOutlined />
-                        { loading ? <LoadingOutlined /> : '' }
+                        {loading ? <LoadingOutlined /> : ''}
                     </Button>
                 </Popover>
 
@@ -88,7 +112,7 @@ function LocalMusic() {
                     <span>刷新</span>
                 </Button>
             </div>
-            <MusicList musicSource={musicList} />
+            <MusicList musicSource={musicList} handleDelete={handleDelete} />
         </div>
     )
 }
