@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/MusicLike.css';
 import { Image, Avatar, Button } from 'antd';
 import { UserOutlined, CaretRightOutlined, ShareAltOutlined } from '@ant-design/icons';
 import MusicList from '../../components/list/MusicList';
+import { LOCAL_MUSIC_KEY } from '../../js/const-key';
+
 
 /**
  * 喜欢的音乐
  */
 function MusicLike() {
+  const [musicList, setMusicList] = useState([]);
+
+  const handleDelete = (key) => {
+
+  }
+
+  /**
+   * 组件生命周期
+   */
+  useEffect(() => {
+    let list = localStorage.getItem(LOCAL_MUSIC_KEY);
+    list = list ? JSON.parse(list) : [];
+    let data = list.filter((item) => item.isLike);
+    setMusicList(data);
+  }, []);
+
   return (
     <div id='musicOutBox'>
       {/* 其它操作 */}
@@ -51,7 +69,12 @@ function MusicLike() {
         </div>
       </div>
       {/* 音乐列表 */}
-      <div className='margin-top-large'><MusicList /></div>
+      <div className='margin-top-large'>
+        <MusicList
+          isShowLikeBtn={false}
+          musicSource={musicList}
+          handleDelete={handleDelete} />
+      </div>
     </div>
   );
 }

@@ -4,11 +4,11 @@ import { Button, Popover } from 'antd';
 import { ImportOutlined, ReloadOutlined, LoadingOutlined } from '@ant-design/icons';
 import './css/LocalMusic.css';
 import jsMd5 from 'js-md5';
+import { LOCAL_MUSIC_KEY } from '../../js/const-key';
 
 // 导入类型常量
 const IMPORT_TYPE = [{ code: 0, message: '导入文件' }, { code: 1, message: '导入文件夹' }];
-// 本地音乐缓存键
-const LOCAL_MUSIC_KEY = 'localMusic';
+
 
 /**
  * 本地音乐页
@@ -62,7 +62,8 @@ function LocalMusic() {
                     title: info.title,
                     singer: info.artist,
                     album: info.album ? info.album : info.title,
-                    size: `${(stats.size / 1024 / 1024).toFixed(2)}M`
+                    size: `${(stats.size / 1024 / 1024).toFixed(2)}M`,
+                    isLike: false
                 }
                 musicData.push(musicInfo);
             }
@@ -91,6 +92,21 @@ function LocalMusic() {
         localStorage.setItem(LOCAL_MUSIC_KEY, JSON.stringify(dataSource));
     };
 
+    /**
+     * 收藏一首本地歌曲
+     * @param {String} key 
+     */
+    const handleLike = (key) => {
+        let dataSource = musicList.filter((item) => {
+            if (item.key === key) {
+                item.isLike = true;
+            }
+            return true;
+        });
+        setMusicList(dataSource);
+        localStorage.setItem(LOCAL_MUSIC_KEY, JSON.stringify(dataSource));
+    };
+
     return (
         <div id="localMusicOutBox">
             <div className="local-music-control">
@@ -112,7 +128,12 @@ function LocalMusic() {
                     <span>刷新</span>
                 </Button>
             </div>
-            <MusicList musicSource={musicList} handleDelete={handleDelete} />
+            <MusicList
+                musicSource={musicList}
+                isShowLikeBtn={true}
+                handleLike={handleLike}
+                handleDelete={handleDelete}
+            />
         </div>
     )
 }

@@ -1,14 +1,20 @@
 import React from 'react';
 import './css/MusicList.css';
 import { Input, Table, Space, Button } from 'antd';
-import { DeleteOutlined, HeartOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
+
+MusicList.defaultProps = {
+    isShowLikeBtn: true,
+    handleLike: (item) => { },
+    handleDelete: (key) => { }
+}
 
 /**
  * 音乐列表
  */
 function MusicList(props) {
+
     /**
      * 搜索回调函数
      */
@@ -53,10 +59,15 @@ function MusicList(props) {
             title: '操作',
             key: 'action',
             render: (_, record) => (
-                <div style={{display:'flex'}}>
-                    <Button type='link'><HeartOutlined />收藏</Button>
+                <div style={{ display: 'flex' }}>
+                    <Button
+                        style={{ display: props.isShowLikeBtn ? '' : 'none' }}
+                        type='link'
+                        onClick={props.handleLike.bind(this, record.key)}
+                    >
+                        <span>{record.isLike ? '已收藏' : '收藏'}</span>
+                    </Button>
                     <Button type='link' onClick={props.handleDelete.bind(this, record.key)}>
-                        <DeleteOutlined />
                         <span>移除</span>
                     </Button>
                 </div>
