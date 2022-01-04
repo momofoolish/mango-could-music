@@ -65,7 +65,7 @@ function MusicList(props) {
                         type='link'
                         onClick={props.handleLike.bind(this, record.key)}
                     >
-                        <span>{record.isLike ? '已收藏' : '收藏'}</span>
+                        <span>{record.isLike ? '已藏' : '收藏'}</span>
                     </Button>
                     <Button type='link' onClick={props.handleDelete.bind(this, record.key)}>
                         <span>移除</span>

@@ -2,12 +2,20 @@
     height: 100vh;
 }
 
+.home-top{
+    height: 7%;
+    background-color: indianred;
+}
+
 .home-center {
     display: flex;
+    height: 80%;
+    background-color: #ffffffd4;
 }
 
 .home-bottom {
-    border-top: 1px solid rgba(128, 128, 128, 0.5);
+    height: 13%;
+    background-color: #ebeeffd4;
 }
 
 

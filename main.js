@@ -11,7 +11,9 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       preload: path.join(__dirname, "preload.js")
-    }
+    },
+    frame: false,
+    transparent: true
   })
 
   if (pkg.DEV) {

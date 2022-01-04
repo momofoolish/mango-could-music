@@ -1,0 +1,14 @@
+#topLayoutOutBox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    padding: 0 1em;
+    -webkit-app-region: drag;
+}
+
+.top-layout-control {
+    -webkit-app-region: no-drag;
+}

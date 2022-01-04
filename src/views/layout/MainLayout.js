@@ -21,12 +21,8 @@ function MainLayout(props) {
     const location = useLocation();
     return (
         <div id='mainOutBox'>
-            <TransitionGroup className="fade">
-                <CSSTransition
-                    key={location.pathname}
-                    timeout={200}
-                    classNames="item"
-                >
+            <TransitionGroup>
+                <CSSTransition key={location.pathname} classNames="fade" timeout={800}>
                     <Routes>
 
                         <Route exact path="/" element={<HomeRoute />} />
