@@ -23,3 +23,5 @@ After checking out this repository, run ```npm install`` to install all dependen
 # Dev tool
 
 This template does not open the dev tool on starting. You can press Cmd+Option+I on Mac, or Ctl+Shift+I on Windows to open the dev tool.
+
+mobx demo: (mobx example)[https://github.com/mobxjs/mobx-react-boilerplate/blob/master/src/components/Todo.jsx]

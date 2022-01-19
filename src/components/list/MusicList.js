@@ -1,8 +1,10 @@
 import React from 'react';
 import './css/MusicList.css';
 import { Input, Table, Space, Button } from 'antd';
+import { observer } from "mobx-react";
 
 const { Search } = Input;
+
 
 MusicList.defaultProps = {
     isShowLikeBtn: true,
@@ -13,18 +15,9 @@ MusicList.defaultProps = {
 /**
  * 音乐列表
  */
-function MusicList(props) {
+const MusicList = observer(({ todo, props }) => {
+    const onSearch = () => { }
 
-    /**
-     * 搜索回调函数
-     */
-    const onSearch = () => {
-
-    }
-
-    /**
-     * 表格行配置
-     */
     const columns = [
         {
             title: '标题',
@@ -76,9 +69,9 @@ function MusicList(props) {
     ]
 
     return (
-        <div id='musicList'>
+        <div id='musicList' >
             {/* 这里是操作栏 */}
-            <div className='music-list-control'>
+            < div className='music-list-control' >
                 <Space>
                     <div className='font-bold font-size-large padding-large'>音乐列表</div>
                     <span>共{props.musicSource.length}首</span>
@@ -90,16 +83,16 @@ function MusicList(props) {
                 />
             </div>
             {/* 这里是列表 */}
-            <div className='music-list-data'>
+            < div className='music-list-data' >
                 <Table
                     size='small'
                     columns={columns}
                     dataSource={props.musicSource}
                     total={props.musicSource.total}
                 />
-            </div>
-        </div>
+            </div >
+        </div >
     )
-}
+});
 
 export default MusicList;
