@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * @author jwss
+ */
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
