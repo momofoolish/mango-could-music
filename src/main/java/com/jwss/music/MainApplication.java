@@ -16,8 +16,8 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1022, 670);
-        scene.setUserAgentStylesheet(Objects.requireNonNull(MainApplication.class.getResource("main-view.css")).toExternalForm());
-        stage.setTitle("Hello!");
+        scene.getStylesheets().add(Objects.requireNonNull(MainApplication.class.getResource("main-view.css")).toExternalForm());
+        stage.setTitle("MusicEverywhere");
         stage.setScene(scene);
         stage.show();
     }
