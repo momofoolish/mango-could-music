@@ -23,7 +23,7 @@
     </center>
 
     <bottom>
-        <HBox fx:id="playerControlBox" alignment="center">
+        <HBox fx:id="playerControlBox" alignment="center" spacing="10">
             <Button text="〈"/>
             <Button text="‖"/>
             <Button text="〉"/>
