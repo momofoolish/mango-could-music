@@ -1,4 +1,4 @@
-package com.jwss.music.utils;
+package com.jwss.music.util;
 
 import com.jwss.music.entity.Music;
 import org.jaudiotagger.audio.AudioFile;
@@ -22,7 +22,7 @@ import java.util.List;
  * @author jwss
  * @date 2022-1-24 21:09:23
  */
-public class MusicUtil {
+public class MusicUtils {
 
     /**
      * 读取音频文件信息
