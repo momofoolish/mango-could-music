@@ -6,4 +6,34 @@ package com.jwss.music.service;
  * @author jwss
  */
 public interface IMediaPlayerService {
+    /**
+     * 播放
+     */
+    void play();
+
+    /**
+     * 暂停
+     */
+    void pause();
+
+    /**
+     * 下一曲
+     */
+    void next();
+
+    /**
+     * 上一曲
+     */
+    void preview();
+
+    /**
+     * 随机播放
+     */
+    void random();
+
+    /**
+     * 顺序播放
+     */
+    void order();
+
 }

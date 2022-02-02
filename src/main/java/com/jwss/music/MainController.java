@@ -13,9 +13,9 @@ import java.io.File;
  */
 public class MainController {
 
-    private final Media media = new Media(new File("F:\\music\\网易云\\田所あずさ - DEAREST DROP.mp3").toURI().toString());
+//    private final Media media = new Media(new File("F:\\music\\网易云\\田所あずさ - DEAREST DROP.mp3").toURI().toString());
 
-    MediaPlayer mediaPlayer = new MediaPlayer(media);
+//    MediaPlayer mediaPlayer = new MediaPlayer(media);
 
     @FXML
     protected void onImportMusicClick() {

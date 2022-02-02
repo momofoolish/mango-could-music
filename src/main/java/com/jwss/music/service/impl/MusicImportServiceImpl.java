@@ -7,4 +7,8 @@ import com.jwss.music.service.IMusicImportService;
  */
 public class MusicImportServiceImpl implements IMusicImportService {
 
+    @Override
+    public void importMusic(Integer importType) {
+
+    }
 }

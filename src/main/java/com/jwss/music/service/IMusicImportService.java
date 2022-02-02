@@ -6,4 +6,9 @@ package com.jwss.music.service;
  * @author jwss
  */
 public interface IMusicImportService {
+    /**
+     * 导入音乐
+     * @param importType 导入类型
+     */
+    void importMusic(Integer importType);
 }
