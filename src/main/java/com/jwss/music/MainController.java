@@ -21,6 +21,18 @@ public class MainController {
     protected void onImportMusicClick() {
         // todo 导入本地音乐
 
+
+    }
+
+    @FXML
+    protected void onPreview() {
+        // todo 上一曲
+    }
+
+    @FXML
+    protected void onPlayOrPause() {
+        // todo 暂停或者播放音乐
+
         // mediaPlayer.setVolume(0.1);
         // ReadOnlyObjectProperty<Duration> currentTimeProperty = mediaPlayer.currentTimeProperty();
         // currentTimeProperty.addListener((observable, oldValue, newValue) -> {
@@ -28,6 +40,10 @@ public class MainController {
         //     System.out.println("newValue=" + newValue);
         // });
         // mediaPlayer.play();
+    }
 
+    @FXML
+    protected void onNext() {
+        // TODO 下一曲
     }
 }
