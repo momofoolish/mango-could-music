@@ -20,6 +20,8 @@ public class MainApplication extends Application {
         stage.setTitle("MusicEverywhere");
         stage.setScene(scene);
         stage.show();
+        // 初始化配置
+        InitApp.config();
     }
 
     public static void main(String[] args) {
