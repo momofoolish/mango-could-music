@@ -1,6 +1,7 @@
 package com.jwss.music.entity;
 
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -18,6 +19,19 @@ public class AppContext {
      * 播放列表
      */
     private static List<Music> playList;
+
+    /**
+     * 场景
+     */
+    private static Stage stage;
+
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static void setStage(Stage stage) {
+        AppContext.stage = stage;
+    }
 
     public static MediaPlayer getMediaPlayer() {
         return mediaPlayer;

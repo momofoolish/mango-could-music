@@ -1,9 +1,13 @@
 package com.jwss.music;
 
+import com.jwss.music.entity.AppContext;
+import com.jwss.music.factory.LoggerFactory;
+import com.jwss.music.logger.Logger;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -13,7 +17,7 @@ import java.io.File;
  * @author jwss
  */
 public class MainController {
-
+    private Logger logger = LoggerFactory.getLogger();
 //    private final Media media = new Media(new File("F:\\music\\网易云\\田所あずさ - DEAREST DROP.mp3").toURI().toString());
 
 //    MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -21,8 +25,10 @@ public class MainController {
     @FXML
     protected void onImportMusicClick() {
         // todo 导入本地音乐
-
-
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("导入音乐");
+        File file = fileChooser.showOpenDialog(AppContext.getStage());
+        logger.info(file.getPath());
     }
 
     @FXML

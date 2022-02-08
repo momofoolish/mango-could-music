@@ -1,5 +1,6 @@
 package com.jwss.music;
 
+import com.jwss.music.entity.AppContext;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,6 +21,8 @@ public class MainApplication extends Application {
         stage.setTitle("MusicEverywhere");
         stage.setScene(scene);
         stage.show();
+        // 将场景放入上下文
+        AppContext.setStage(stage);
         // 初始化配置
         InitApp.config();
     }
