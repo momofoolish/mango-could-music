@@ -7,8 +7,17 @@ package com.jwss.music.service;
  */
 public interface IMusicImportService {
     /**
-     * 导入音乐
-     * @param importType 导入类型
+     * 导入音乐（选择多个文件）
      */
-    void importMusic(Integer importType);
+    void importMusic();
+
+    /**
+     * 导入音乐（遍历文件夹）
+     */
+    void importMusicByFolder();
+
+    /**
+     * 导入音乐（解析JSON）
+     */
+    void importMusicByShare();
 }

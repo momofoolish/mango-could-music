@@ -7,6 +7,16 @@ package com.jwss.music.logger;
 public class Logger implements ILogger{
     @Override
     public void info(String s) {
-        System.out.println(s);
+        System.out.printf("logger.info: %s%n", s);
+    }
+
+    @Override
+    public void warn(String s) {
+        System.out.printf("logger.warn: %s%n", s);
+    }
+
+    @Override
+    public void error(String s) {
+        System.out.printf("logger.error: %s%n", s);
     }
 }

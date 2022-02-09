@@ -8,9 +8,11 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jwss.music.MainController">
     <top>
-        <VBox>
+        <HBox>
             <Button onMouseClicked="#onImportMusicClick" text="导入音乐" />
-        </VBox>
+            <Button onMouseClicked="#onImportMusicClickByFolder" text="导入本地乐库" />
+            <Button onMouseClicked="#onImportMusicClickByShare" text="导入分享乐库" />
+        </HBox>
     </top>
 
     <left>

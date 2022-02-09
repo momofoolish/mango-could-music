@@ -11,4 +11,17 @@ public interface ILogger {
      * @param s 字符串
      */
     void info(String s);
+
+    /**
+     * 输出警告信息
+     * @param s 字符串
+     */
+    void warn(String s);
+
+    /**
+     * 输出错误信息
+     * @param s 字符串
+     */
+    void error(String s);
+
 }
