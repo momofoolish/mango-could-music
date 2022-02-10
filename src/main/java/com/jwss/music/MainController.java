@@ -1,6 +1,12 @@
 package com.jwss.music;
 
+import com.jwss.music.entity.Music;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 /**
  * @author jwss
@@ -10,10 +16,18 @@ public class MainController {
 //    private final Media media = new Media(new File("F:\\music\\网易云\\田所あずさ - DEAREST DROP.mp3").toURI().toString());
 
 //    MediaPlayer mediaPlayer = new MediaPlayer(media);
+    public TableView<Music> musicTableView;
+
 
     @FXML
     protected void onImportMusicClick() {
         // todo 导入本地音乐
+        Music music = new Music();
+        music.setAlbum("ablum");
+        music.setName("aaaaaa");
+        ObservableList<Music> musicObservableList = FXCollections.observableArrayList();
+        musicObservableList.setAll(music);
+        musicTableView.setItems(musicObservableList);
 
     }
 

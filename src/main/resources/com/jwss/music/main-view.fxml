@@ -20,7 +20,7 @@
     </left>
 
     <center>
-        <TableView/>
+        <TableView fx:id="musicTableView"/>
     </center>
 
     <bottom>
