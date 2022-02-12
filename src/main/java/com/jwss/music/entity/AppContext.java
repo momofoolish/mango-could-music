@@ -1,5 +1,6 @@
 package com.jwss.music.entity;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
@@ -24,6 +25,19 @@ public class AppContext {
      * 场景
      */
     private static Stage stage;
+
+    /**
+     * FXML资源加载器
+     */
+    private static FXMLLoader fxmlLoader;
+
+    public static FXMLLoader getFxmlLoader() {
+        return fxmlLoader;
+    }
+
+    public static void setFxmlLoader(FXMLLoader fxmlLoader) {
+        AppContext.fxmlLoader = fxmlLoader;
+    }
 
     public static Stage getStage() {
         return stage;

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.control.TableColumn?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jwss.music.MainController">
     <top>
         <HBox>
@@ -20,7 +21,15 @@
     </left>
 
     <center>
-        <TableView fx:id="musicTableView"/>
+        <TableView fx:id="musicTableView">
+            <columns>
+                <TableColumn fx:id="nameTableColumn" text="标题" minWidth="250"/>
+                <TableColumn fx:id="authorTableColumn" text="歌手" minWidth="120"/>
+                <TableColumn fx:id="albumTableColumn" text="专辑" minWidth="200"/>
+                <TableColumn fx:id="durationTableColumn" text="时长" minWidth="100"/>
+                <TableColumn fx:id="sizeTableColumn" text="大小" minWidth="100"/>
+            </columns>
+        </TableView>
     </center>
 
     <bottom>

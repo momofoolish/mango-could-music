@@ -22,6 +22,7 @@ public class MainApplication extends Application {
         stage.setScene(scene);
         stage.show();
         // 将场景放入上下文
+        AppContext.setFxmlLoader(fxmlLoader);
         AppContext.setStage(stage);
         // 初始化配置
         InitApp.config();

@@ -1,34 +1,56 @@
 package com.jwss.music;
 
 import com.jwss.music.entity.Music;
+import com.jwss.music.factory.LoggerFactory;
+import com.jwss.music.logger.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author jwss
  * @date 2022-2-6 22:13:40
  */
 public class MainController {
+    private static final Logger logger = LoggerFactory.getLogger();
 //    private final Media media = new Media(new File("F:\\music\\网易云\\田所あずさ - DEAREST DROP.mp3").toURI().toString());
 
 //    MediaPlayer mediaPlayer = new MediaPlayer(media);
-    public TableView<Music> musicTableView;
 
+    @FXML
+    private TableView<Music> musicTableView;
+    @FXML
+    private TableColumn<Music, String> nameTableColumn;
+    @FXML
+    private TableColumn<Music, String> authorTableColumn;
+    @FXML
+    private TableColumn<Music, String> albumTableColumn;
+    @FXML
+    private TableColumn<Music, String> durationTableColumn;
+    @FXML
+    private TableColumn<Music, String> sizeTableColumn;
 
     @FXML
     protected void onImportMusicClick() {
         // todo 导入本地音乐
+        List<Music> musicList = new ArrayList<>();
         Music music = new Music();
-        music.setAlbum("ablum");
-        music.setName("aaaaaa");
-        ObservableList<Music> musicObservableList = FXCollections.observableArrayList();
-        musicObservableList.setAll(music);
-        musicTableView.setItems(musicObservableList);
+        music.setName("title");
+        music.setAuthor("jwss");
+        music.setAlbum("caa jwss");
+        music.setDuration("12 Min");
+        music.setSize("1.23 MB");
+        musicList.add(music);
 
+        ObservableList<Music> musicObservableList = FXCollections.observableArrayList();
+        musicObservableList.addAll(musicList);
+        musicTableView.setItems(musicObservableList);
     }
 
     @FXML
@@ -63,5 +85,17 @@ public class MainController {
     @FXML
     protected void onNext() {
         // TODO 下一曲
+    }
+
+    /**
+     * 在fxml文件完成载入时自动被调用
+     */
+    @FXML
+    protected void initialize() {
+        nameTableColumn.setCellValueFactory(cell -> cell.getValue().nameProperty());
+        authorTableColumn.setCellValueFactory(cell -> cell.getValue().authorProperty());
+        albumTableColumn.setCellValueFactory(cell -> cell.getValue().albumProperty());
+        durationTableColumn.setCellValueFactory(cell -> cell.getValue().durationProperty());
+        sizeTableColumn.setCellValueFactory(cell -> cell.getValue().sizeProperty());
     }
 }

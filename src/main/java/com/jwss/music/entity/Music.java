@@ -1,80 +1,106 @@
 package com.jwss.music.entity;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  * @date 2022-1-24 21:02:20
  * @author jwss
  */
-public class Music {
+public class Music{
     /**
      * 音乐名称
      */
-    private String name;
+    private final SimpleStringProperty name = new SimpleStringProperty();
     /**
      * 音乐作者
      */
-    private String author;
+    private final SimpleStringProperty author = new SimpleStringProperty();
     /**
      * 专辑
      */
-    private String album;
+    private final SimpleStringProperty album = new SimpleStringProperty();
     /**
      * 时长
      */
-    private Long duration;
+    private final SimpleStringProperty duration = new SimpleStringProperty();
     /**
      * 文件大小
      */
-    private Long size;
+    private final SimpleStringProperty size = new SimpleStringProperty();
     /**
      * 存放位置
      */
-    private String url;
+    private final SimpleStringProperty url = new SimpleStringProperty();
 
     public String getName() {
+        return name.get();
+    }
+
+    public SimpleStringProperty nameProperty() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
     public String getAuthor() {
+        return author.get();
+    }
+
+    public SimpleStringProperty authorProperty() {
         return author;
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        this.author.set(author);
     }
 
     public String getAlbum() {
+        return album.get();
+    }
+
+    public SimpleStringProperty albumProperty() {
         return album;
     }
 
     public void setAlbum(String album) {
-        this.album = album;
+        this.album.set(album);
     }
 
-    public Long getDuration() {
+    public String getDuration() {
+        return duration.get();
+    }
+
+    public SimpleStringProperty durationProperty() {
         return duration;
     }
 
-    public void setDuration(Long duration) {
-        this.duration = duration;
+    public void setDuration(String duration) {
+        this.duration.set(duration);
     }
 
-    public Long getSize() {
+    public String getSize() {
+        return size.get();
+    }
+
+    public SimpleStringProperty sizeProperty() {
         return size;
     }
 
-    public void setSize(Long size) {
-        this.size = size;
+    public void setSize(String size) {
+        this.size.set(size);
     }
 
     public String getUrl() {
+        return url.get();
+    }
+
+    public SimpleStringProperty urlProperty() {
         return url;
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        this.url.set(url);
     }
 }

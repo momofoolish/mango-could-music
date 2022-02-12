@@ -50,9 +50,9 @@ public class MusicUtils {
             music.setName(tag.getFirst(FieldKey.TITLE));
             // 时长
             MP3AudioHeader mp3AudioHeader = (MP3AudioHeader) audioFile.getAudioHeader();
-            music.setDuration((long) mp3AudioHeader.getTrackLength());
+            music.setDuration((long) mp3AudioHeader.getTrackLength() + " MB");
             // 文件大小
-            music.setSize(file.length());
+            music.setSize(file.length() + " MB");
             // 文件路径
             music.setUrl(url);
             musicList.add(music);
