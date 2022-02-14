@@ -8,8 +8,9 @@ package com.jwss.music.service;
 public interface IMediaPlayerService {
     /**
      * 播放
+     * @param url 音乐地址
      */
-    void play();
+    void play(String url);
 
     /**
      * 暂停

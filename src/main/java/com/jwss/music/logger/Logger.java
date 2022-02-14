@@ -1,6 +1,7 @@
 package com.jwss.music.logger;
 
 /**
+ * 日志实现类
  * @date 2022-2-8 22:46:07
  * @author jwss
  */

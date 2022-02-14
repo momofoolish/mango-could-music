@@ -1,7 +1,6 @@
 package com.jwss.music.entity;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -12,14 +11,14 @@ import java.util.List;
  */
 public class AppContext {
     /**
-     * 媒体播放器
-     */
-    private static MediaPlayer mediaPlayer;
-
-    /**
      * 播放列表
      */
     private static List<Music> playList;
+
+    /**
+     * 播放状态：TRUE表示正在播放
+     */
+    private static Boolean isPlay;
 
     /**
      * 场景
@@ -35,6 +34,14 @@ public class AppContext {
         return fxmlLoader;
     }
 
+    public static Boolean getIsPlay() {
+        return isPlay;
+    }
+
+    public static void setIsPlay(Boolean isPlay) {
+        AppContext.isPlay = isPlay;
+    }
+
     public static void setFxmlLoader(FXMLLoader fxmlLoader) {
         AppContext.fxmlLoader = fxmlLoader;
     }
@@ -45,14 +52,6 @@ public class AppContext {
 
     public static void setStage(Stage stage) {
         AppContext.stage = stage;
-    }
-
-    public static MediaPlayer getMediaPlayer() {
-        return mediaPlayer;
-    }
-
-    public static void setMediaPlayer(MediaPlayer mediaPlayer) {
-        AppContext.mediaPlayer = mediaPlayer;
     }
 
     public static List<Music> getPlayList() {

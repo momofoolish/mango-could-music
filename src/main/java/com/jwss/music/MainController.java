@@ -1,8 +1,11 @@
 package com.jwss.music;
 
+import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
 import com.jwss.music.factory.LoggerFactory;
+import com.jwss.music.factory.ServiceFactory;
 import com.jwss.music.logger.Logger;
+import com.jwss.music.service.IMediaPlayerService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,9 +22,6 @@ import java.util.List;
  */
 public class MainController {
     private static final Logger logger = LoggerFactory.getLogger();
-//    private final Media media = new Media(new File("F:\\music\\网易云\\田所あずさ - DEAREST DROP.mp3").toURI().toString());
-
-//    MediaPlayer mediaPlayer = new MediaPlayer(media);
 
     @FXML
     private TableView<Music> musicTableView;
@@ -35,6 +35,8 @@ public class MainController {
     private TableColumn<Music, String> durationTableColumn;
     @FXML
     private TableColumn<Music, String> sizeTableColumn;
+
+    private final IMediaPlayerService mediaPlayerService = ServiceFactory.getMediaPlayer();
 
     @FXML
     protected void onImportMusicClick() {
@@ -54,7 +56,7 @@ public class MainController {
     }
 
     @FXML
-    protected void onImportMusicClickByFolder(){
+    protected void onImportMusicClickByFolder() {
         // TODO 导入文件夹
 
     }
@@ -72,14 +74,11 @@ public class MainController {
     @FXML
     protected void onPlayOrPause() {
         // todo 暂停或者播放音乐
-
-        // mediaPlayer.setVolume(0.1);
-        // ReadOnlyObjectProperty<Duration> currentTimeProperty = mediaPlayer.currentTimeProperty();
-        // currentTimeProperty.addListener((observable, oldValue, newValue) -> {
-        //     System.out.println("oldValue=" + oldValue);
-        //     System.out.println("newValue=" + newValue);
-        // });
-        // mediaPlayer.play();
+        if (!AppContext.getIsPlay()) {
+            mediaPlayerService.play("");
+        } else {
+            mediaPlayerService.pause();
+        }
     }
 
     @FXML
