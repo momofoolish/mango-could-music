@@ -15,7 +15,6 @@ public class InitApp {
         // 1.初始化 UI界面配置（包括主题）
         // 2.初始化 播放列表
         // 3.初始化 初始化播放器配置
-        AppContext.setMediaPlayer();
     }
 
 }
