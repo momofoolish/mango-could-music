@@ -6,13 +6,19 @@ import com.jwss.music.factory.LoggerFactory;
 import com.jwss.music.factory.ServiceFactory;
 import com.jwss.music.logger.Logger;
 import com.jwss.music.service.IMediaPlayerService;
+import com.jwss.music.service.IMusicImportService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.jaudiotagger.audio.exceptions.CannotReadException;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
+import org.jaudiotagger.tag.TagException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,17 +44,11 @@ public class MainController {
 
     private final IMediaPlayerService mediaPlayerService = ServiceFactory.getMediaPlayer();
 
+    private final IMusicImportService musicImportService = ServiceFactory.getMusicImport();
+
     @FXML
     protected void onImportMusicClick() {
-        // todo 导入本地音乐
-        List<Music> musicList = new ArrayList<>();
-        Music music = new Music();
-        music.setName("title");
-        music.setAuthor("jwss");
-        music.setAlbum("caa jwss");
-        music.setDuration("12 Min");
-        music.setSize("1.23 MB");
-        musicList.add(music);
+        List<Music> musicList = musicImportService.importMusic();
 
         ObservableList<Music> musicObservableList = FXCollections.observableArrayList();
         musicObservableList.addAll(musicList);

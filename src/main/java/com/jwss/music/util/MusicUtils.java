@@ -29,19 +29,14 @@ public class MusicUtils {
      *
      * @param urls 文件路径集合
      * @return 音频列表
-     * @throws CannotReadException
-     * @throws TagException
-     * @throws InvalidAudioFrameException
-     * @throws ReadOnlyFileException
-     * @throws IOException
      */
     public static List<Music> readMusicsInfo(List<String> urls) throws CannotReadException, TagException, InvalidAudioFrameException, ReadOnlyFileException, IOException {
         List<Music> musicList = new ArrayList<>(urls.size());
-        Music music = urls.size() > 0 ? new Music() : null;
         for (String url : urls) {
             File file = new File(url);
             AudioFile audioFile = AudioFileIO.read(file);
             Tag tag = audioFile.getTag();
+            Music music = new Music();
             // 作者
             music.setAuthor(tag.getFirst(FieldKey.ARTIST));
             // 专辑
@@ -50,9 +45,9 @@ public class MusicUtils {
             music.setName(tag.getFirst(FieldKey.TITLE));
             // 时长
             MP3AudioHeader mp3AudioHeader = (MP3AudioHeader) audioFile.getAudioHeader();
-            music.setDuration((long) mp3AudioHeader.getTrackLength() + " MB");
+            music.setDuration((long) mp3AudioHeader.getTrackLength() + " 秒");
             // 文件大小
-            music.setSize(file.length() + " MB");
+            music.setSize(file.length() / 1024 / 1024 + " MB");
             // 文件路径
             music.setUrl(url);
             musicList.add(music);
