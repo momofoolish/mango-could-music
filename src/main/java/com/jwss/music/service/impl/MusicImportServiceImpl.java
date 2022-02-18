@@ -3,7 +3,9 @@ package com.jwss.music.service.impl;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
 import com.jwss.music.factory.LoggerFactory;
+import com.jwss.music.factory.ServiceFactory;
 import com.jwss.music.logger.Logger;
+import com.jwss.music.service.ICacheService;
 import com.jwss.music.service.IMusicImportService;
 import com.jwss.music.util.MusicUtils;
 import javafx.stage.DirectoryChooser;
@@ -23,6 +25,8 @@ import java.util.List;
  */
 public class MusicImportServiceImpl implements IMusicImportService {
     private final Logger logger = LoggerFactory.getLogger();
+
+    private final ICacheService cacheService = ServiceFactory.getCacheService();
 
     @Override
     public List<Music> importMusic() {

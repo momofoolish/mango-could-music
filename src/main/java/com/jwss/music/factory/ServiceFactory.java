@@ -1,7 +1,9 @@
 package com.jwss.music.factory;
 
+import com.jwss.music.service.ICacheService;
 import com.jwss.music.service.IMediaPlayerService;
 import com.jwss.music.service.IMusicImportService;
+import com.jwss.music.service.impl.CacheServiceImpl;
 import com.jwss.music.service.impl.MediaPlayerServiceImpl;
 import com.jwss.music.service.impl.MusicImportServiceImpl;
 
@@ -16,8 +18,11 @@ public class ServiceFactory {
 
     private static IMusicImportService iMusicImportService = null;
 
+    private static ICacheService iCacheService;
+
     /**
      * 获取媒体播放器服务实例
+     *
      * @return 媒体播放器服务实例
      */
     public static IMediaPlayerService getMediaPlayer() {
@@ -30,6 +35,7 @@ public class ServiceFactory {
 
     /**
      * 获取导入音乐服务实例
+     *
      * @return 导入音乐服务实例
      */
     public static IMusicImportService getMusicImport() {
@@ -38,6 +44,19 @@ public class ServiceFactory {
             return iMusicImportService;
         }
         return iMusicImportService;
+    }
+
+    /**
+     * 获取缓存服务实例
+     *
+     * @return 缓存服务实例
+     */
+    public static ICacheService getCacheService() {
+        if (iCacheService == null) {
+            iCacheService = new CacheServiceImpl();
+            return iCacheService;
+        }
+        return iCacheService;
     }
 
 }
