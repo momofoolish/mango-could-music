@@ -12,14 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import org.jaudiotagger.audio.exceptions.CannotReadException;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
-import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
-import org.jaudiotagger.tag.TagException;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -91,6 +84,7 @@ public class MainController {
      */
     @FXML
     protected void initialize() {
+        musicTableView.getSelectionModel().getSelectedItems().addListener(mediaPlayerService.clickToPlay());
         nameTableColumn.setCellValueFactory(cell -> cell.getValue().nameProperty());
         authorTableColumn.setCellValueFactory(cell -> cell.getValue().authorProperty());
         albumTableColumn.setCellValueFactory(cell -> cell.getValue().albumProperty());

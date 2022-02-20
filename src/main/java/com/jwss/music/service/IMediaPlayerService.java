@@ -1,13 +1,25 @@
 package com.jwss.music.service;
 
+import com.jwss.music.entity.Music;
+import javafx.collections.ListChangeListener;
+
 /**
  * 播放器服务接口
- * @date 2022-1-27 19:16:14
+ *
  * @author jwss
+ * @date 2022-1-27 19:16:14
  */
 public interface IMediaPlayerService {
     /**
+     * 双击表格某项播放
+     *
+     * @return 监听器
+     */
+    ListChangeListener<Music> clickToPlay();
+
+    /**
      * 播放
+     *
      * @param url 音乐地址
      */
     void play(String url);
