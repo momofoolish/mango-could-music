@@ -30,6 +30,8 @@ public class AppContext {
      */
     private static FXMLLoader fxmlLoader;
 
+    public final static String CACHE_FILE = "m_cache.csv";
+
     public static FXMLLoader getFxmlLoader() {
         return fxmlLoader;
     }

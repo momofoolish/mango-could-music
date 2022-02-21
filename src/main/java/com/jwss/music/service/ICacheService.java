@@ -17,4 +17,11 @@ public interface ICacheService {
      * @param musicList 音乐列表
      */
     void saveMusicList(List<Music> musicList);
+
+    /**
+     * 获取已缓存导入的音乐列表
+     *
+     * @return 音乐列表
+     */
+    List<Music> getMusicList();
 }

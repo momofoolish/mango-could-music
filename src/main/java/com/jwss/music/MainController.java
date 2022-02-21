@@ -5,6 +5,7 @@ import com.jwss.music.entity.Music;
 import com.jwss.music.factory.LoggerFactory;
 import com.jwss.music.factory.ServiceFactory;
 import com.jwss.music.logger.Logger;
+import com.jwss.music.service.ICacheService;
 import com.jwss.music.service.IMediaPlayerService;
 import com.jwss.music.service.IMusicImportService;
 import javafx.collections.FXCollections;
@@ -39,19 +40,18 @@ public class MainController {
 
     private final IMusicImportService musicImportService = ServiceFactory.getMusicImport();
 
+    private final ICacheService cacheService = ServiceFactory.getCacheService();
+
     @FXML
     protected void onImportMusicClick() {
         List<Music> musicList = musicImportService.importMusic();
-
-        ObservableList<Music> musicObservableList = FXCollections.observableArrayList();
-        musicObservableList.addAll(musicList);
-        musicTableView.setItems(musicObservableList);
+        renderTableView(musicList);
+        cacheService.saveMusicList(musicList);
     }
 
     @FXML
     protected void onImportMusicClickByFolder() {
         // TODO 导入文件夹
-
     }
 
     @FXML
@@ -90,5 +90,18 @@ public class MainController {
         albumTableColumn.setCellValueFactory(cell -> cell.getValue().albumProperty());
         durationTableColumn.setCellValueFactory(cell -> cell.getValue().durationProperty());
         sizeTableColumn.setCellValueFactory(cell -> cell.getValue().sizeProperty());
+        // 加载本地音乐
+        renderTableView(cacheService.getMusicList());
+    }
+
+    /**
+     * 渲染表格数据
+     *
+     * @param musicList 音乐列表
+     */
+    private void renderTableView(List<Music> musicList) {
+        ObservableList<Music> musicObservableList = FXCollections.observableArrayList();
+        musicObservableList.addAll(musicList);
+        musicTableView.setItems(musicObservableList);
     }
 }
