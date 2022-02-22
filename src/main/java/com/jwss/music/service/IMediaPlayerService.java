@@ -25,6 +25,11 @@ public interface IMediaPlayerService {
     void play(String url);
 
     /**
+     * 继续播放
+     */
+    void play();
+
+    /**
      * 暂停
      */
     void pause();

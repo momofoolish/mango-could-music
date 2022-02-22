@@ -5,12 +5,14 @@ import com.jwss.music.entity.Music;
 import com.jwss.music.factory.LoggerFactory;
 import com.jwss.music.factory.ServiceFactory;
 import com.jwss.music.logger.Logger;
+import com.jwss.music.observer.ViewObserver;
 import com.jwss.music.service.ICacheService;
 import com.jwss.music.service.IMediaPlayerService;
 import com.jwss.music.service.IMusicImportService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -35,6 +37,9 @@ public class MainController {
     private TableColumn<Music, String> durationTableColumn;
     @FXML
     private TableColumn<Music, String> sizeTableColumn;
+
+    @FXML
+    private Button playOrPauseMusicBtn;
 
     private final IMediaPlayerService mediaPlayerService = ServiceFactory.getMediaPlayer();
 
@@ -66,9 +71,9 @@ public class MainController {
 
     @FXML
     protected void onPlayOrPause() {
-        // todo 暂停或者播放音乐
+        // 暂停或者播放音乐
         if (!AppContext.getIsPlay()) {
-            mediaPlayerService.play("");
+            mediaPlayerService.play();
         } else {
             mediaPlayerService.pause();
         }
@@ -92,6 +97,8 @@ public class MainController {
         sizeTableColumn.setCellValueFactory(cell -> cell.getValue().sizeProperty());
         // 加载本地音乐
         renderTableView(cacheService.getMusicList());
+        // 加载需要观察的对象
+        ViewObserver.load(playOrPauseMusicBtn);
     }
 
     /**

@@ -35,7 +35,7 @@
     <bottom>
         <HBox fx:id="playerControlBox" alignment="center" spacing="10">
             <Button onMouseClicked="#onPreview" fx:id="previewMusicBtn" text="⏮"/>
-            <Button onMouseClicked="#onPlayOrPause" fx:id="pauseMusicBtn" text="▶"/>
+            <Button onMouseClicked="#onPlayOrPause" fx:id="playOrPauseMusicBtn" text="▶"/>
             <Button onMouseClicked="#onNext" fx:id="nextMusicBtn" text="⏭"/>
         </HBox>
     </bottom>

@@ -1,5 +1,6 @@
 package com.jwss.music.entity;
 
+import com.jwss.music.observer.ViewObserver;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 
@@ -41,6 +42,7 @@ public class AppContext {
     }
 
     public static void setIsPlay(Boolean isPlay) {
+        ViewObserver.updatePlayOrPauseMusicBtn(isPlay);
         AppContext.isPlay = isPlay;
     }
 
