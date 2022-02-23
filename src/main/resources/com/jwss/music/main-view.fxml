@@ -8,16 +8,12 @@
 
 <?import javafx.scene.control.TableColumn?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jwss.music.MainController">
-    <top>
-        <HBox>
-            <Button onMouseClicked="#onImportMusicClick" text="导入音乐" />
-            <Button onMouseClicked="#onImportMusicClickByFolder" text="导入本地乐库" />
-            <Button onMouseClicked="#onImportMusicClickByShare" text="导入分享乐库" />
-        </HBox>
-    </top>
-
     <left>
-        <ListView/>
+        <VBox minWidth="210">
+            <Button minWidth="205" onMouseClicked="#onImportMusicClick" text="导入音乐" />
+            <Button minWidth="205" onMouseClicked="#onImportMusicClickByFolder" text="导入本地乐库" />
+            <Button minWidth="205" onMouseClicked="#onImportMusicClickByShare" text="导入分享乐库" />
+        </VBox>
     </left>
 
     <center>

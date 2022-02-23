@@ -13,6 +13,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * @author jwss
@@ -24,13 +25,22 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
 
     @Override
     public ListChangeListener<Music> clickToPlay() {
-        ListChangeListener<Music> listener = new ListChangeListener<Music>() {
-            @Override
-            public void onChanged(Change<? extends Music> c) {
-                play(c.getList().get(0).getUrl());
+        return c -> {
+            String url = c.getList().get(0).getUrl();
+            // 播放
+            play(url);
+            // 设置当前播放的歌曲
+            List<Music> playList = AppContext.getPlayList();
+            int size = playList.size();
+            for (int i = 0; i < size; i++) {
+                if (url.equals(playList.get(i).getUrl())) {
+                    AppContext.setCurrentPlay(i);
+                    break;
+                } else if (i >= size - 1) {
+                    AppContext.setCurrentPlay(0);
+                }
             }
         };
-        return listener;
     }
 
     @Override
@@ -62,12 +72,23 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
 
     @Override
     public void next() {
-
+        Integer index = AppContext.getCurrentPlay();
+        if (index < AppContext.getPlayList().size()) {
+            Music music = AppContext.getPlayList().get(index + 1);
+            play(music.getUrl());
+            AppContext.setCurrentPlay(index + 1);
+        }
     }
 
     @Override
     public void preview() {
-
+        // 拿到当前的歌曲索引
+        Integer index = AppContext.getCurrentPlay();
+        if (index > 0) {
+            Music music = AppContext.getPlayList().get(index - 1);
+            play(music.getUrl());
+            AppContext.setCurrentPlay(index - 1);
+        }
     }
 
     @Override

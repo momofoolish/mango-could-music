@@ -66,7 +66,8 @@ public class MainController {
 
     @FXML
     protected void onPreview() {
-        // todo 上一曲
+        // 上一曲
+        mediaPlayerService.preview();
     }
 
     @FXML
@@ -81,7 +82,8 @@ public class MainController {
 
     @FXML
     protected void onNext() {
-        // TODO 下一曲
+        // 下一曲
+        mediaPlayerService.next();
     }
 
     /**
@@ -99,6 +101,8 @@ public class MainController {
         renderTableView(cacheService.getMusicList());
         // 加载需要观察的对象
         ViewObserver.load(playOrPauseMusicBtn);
+        // 将音乐加入到播放列表
+        AppContext.setPlayList(cacheService.getMusicList());
     }
 
     /**

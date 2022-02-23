@@ -22,6 +22,11 @@ public class AppContext {
     private static Boolean isPlay;
 
     /**
+     * 当前播放的歌曲
+     */
+    private static Integer currentPlay;
+
+    /**
      * 场景
      */
     private static Stage stage;
@@ -32,6 +37,14 @@ public class AppContext {
     private static FXMLLoader fxmlLoader;
 
     public final static String CACHE_FILE = "m_cache.csv";
+
+    public static Integer getCurrentPlay() {
+        return currentPlay;
+    }
+
+    public static void setCurrentPlay(Integer currentPlay) {
+        AppContext.currentPlay = currentPlay;
+    }
 
     public static FXMLLoader getFxmlLoader() {
         return fxmlLoader;
