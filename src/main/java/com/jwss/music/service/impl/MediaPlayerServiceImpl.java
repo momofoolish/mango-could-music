@@ -52,8 +52,9 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
         mediaPlayer.setVolume(0.2);
         ReadOnlyObjectProperty<Duration> currentTimeProperty = mediaPlayer.currentTimeProperty();
         currentTimeProperty.addListener((observable, oldValue, newValue) -> {
-            logger.info("oldValue=" + oldValue);
-            logger.info("newValue=" + newValue);
+            logger.info("total=" + observable.getValue());
+            logger.info("oldValue=" + oldValue.toSeconds());
+            logger.info("newValue=" + newValue.toSeconds());
         });
         play();
     }

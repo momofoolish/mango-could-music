@@ -3,10 +3,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 
 <?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Label?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jwss.music.MainController">
     <left>
         <VBox minWidth="210">
@@ -29,10 +30,17 @@
     </center>
 
     <bottom>
-        <HBox fx:id="playerControlBox" alignment="center" spacing="10">
-            <Button onMouseClicked="#onPreview" fx:id="previewMusicBtn" text="⏮"/>
-            <Button onMouseClicked="#onPlayOrPause" fx:id="playOrPauseMusicBtn" text="▶"/>
-            <Button onMouseClicked="#onNext" fx:id="nextMusicBtn" text="⏭"/>
-        </HBox>
+        <VBox>
+            <HBox alignment="center" spacing="10">
+                <Button onMouseClicked="#onPreview" text="⏮"/>
+                <Button onMouseClicked="#onPlayOrPause" fx:id="playOrPauseMusicBtn" text="▶"/>
+                <Button onMouseClicked="#onNext" text="⏭"/>
+            </HBox>
+            <HBox alignment="center">
+                <Label text="00:12" fx:id="currentPlayLabel"/>
+                <ProgressBar minWidth="300" fx:id="musicPlayProgress" progress="0.00"/>
+                <Label text="04:12" fx:id="endPlayLabel"/>
+            </HBox>
+        </VBox>
     </bottom>
 </BorderPane>

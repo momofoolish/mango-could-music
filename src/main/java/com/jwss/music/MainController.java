@@ -12,9 +12,7 @@ import com.jwss.music.service.IMusicImportService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 
 import java.util.List;
 
@@ -37,6 +35,13 @@ public class MainController {
     private TableColumn<Music, String> durationTableColumn;
     @FXML
     private TableColumn<Music, String> sizeTableColumn;
+
+    @FXML
+    private ProgressBar musicPlayProgress;
+    @FXML
+    private Label currentPlayLabel;
+    @FXML
+    private Label endPlayLabel;
 
     @FXML
     private Button playOrPauseMusicBtn;
@@ -100,7 +105,7 @@ public class MainController {
         // 加载本地音乐
         renderTableView(cacheService.getMusicList());
         // 加载需要观察的对象
-        ViewObserver.load(playOrPauseMusicBtn);
+        ViewObserver.load(playOrPauseMusicBtn, currentPlayLabel, endPlayLabel, musicPlayProgress);
         // 将音乐加入到播放列表
         AppContext.setPlayList(cacheService.getMusicList());
     }
