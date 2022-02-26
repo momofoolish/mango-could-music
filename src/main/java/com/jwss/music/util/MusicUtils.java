@@ -45,7 +45,7 @@ public class MusicUtils {
             music.setName(tag.getFirst(FieldKey.TITLE));
             // 时长
             MP3AudioHeader mp3AudioHeader = (MP3AudioHeader) audioFile.getAudioHeader();
-            music.setDuration((long) mp3AudioHeader.getTrackLength() + " 秒");
+            music.setDuration(String.valueOf(mp3AudioHeader.getTrackLength()));
             // 文件大小
             music.setSize(file.length() / 1024 / 1024 + " MB");
             // 文件路径

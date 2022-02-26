@@ -17,7 +17,10 @@ public class CacheServiceImpl implements ICacheService {
     @Override
     public void saveMusicList(List<Music> musicList) {
         CsvWriter writer = CsvUtil.getWriter(AppContext.CACHE_FILE, StandardCharsets.UTF_8);
-        musicList.forEach(item -> writer.writeLine(item.getName(), item.getAuthor(), item.getAlbum(), item.getDuration(), item.getSize(), item.getUrl()));
+        musicList.forEach(item -> writer.writeLine(
+                item.getName(), item.getAuthor(), item.getAlbum(), String.valueOf(item.getDuration()), item.getSize(),
+                item.getUrl())
+        );
         writer.close();
     }
 

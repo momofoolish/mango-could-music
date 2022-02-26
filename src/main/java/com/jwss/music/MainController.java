@@ -9,6 +9,7 @@ import com.jwss.music.observer.ViewObserver;
 import com.jwss.music.service.ICacheService;
 import com.jwss.music.service.IMediaPlayerService;
 import com.jwss.music.service.IMusicImportService;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

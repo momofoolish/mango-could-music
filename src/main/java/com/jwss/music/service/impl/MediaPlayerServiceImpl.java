@@ -6,6 +6,7 @@ import com.jwss.music.factory.LoggerFactory;
 import com.jwss.music.logger.Logger;
 import com.jwss.music.observer.ViewObserver;
 import com.jwss.music.service.IMediaPlayerService;
+import com.jwss.music.util.TimeUtils;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ListChangeListener;
 import javafx.scene.media.Media;
@@ -28,7 +29,7 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
         return c -> {
             String url = c.getList().get(0).getUrl();
             // 播放
-            play(url);
+            play(c.getList().get(0));
             // 设置当前播放的歌曲
             List<Music> playList = AppContext.getPlayList();
             int size = playList.size();
@@ -44,17 +45,18 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
     }
 
     @Override
-    public void play(String url) {
+    public void play(Music music) {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
-        mediaPlayer = new MediaPlayer(new Media(new File(url).toURI().toString()));
+        mediaPlayer = new MediaPlayer(new Media(new File(music.getUrl()).toURI().toString()));
         mediaPlayer.setVolume(0.2);
         ReadOnlyObjectProperty<Duration> currentTimeProperty = mediaPlayer.currentTimeProperty();
+        String endPlay = TimeUtils.secondsToMin(Integer.parseInt(music.getDuration()));
         currentTimeProperty.addListener((observable, oldValue, newValue) -> {
-            logger.info("total=" + observable.getValue());
-            logger.info("oldValue=" + oldValue.toSeconds());
-            logger.info("newValue=" + newValue.toSeconds());
+            double seconds = newValue.toSeconds();
+            double v = seconds / Integer.parseInt(music.getDuration());
+            ViewObserver.updateProgressBar(TimeUtils.secondsToMin((int) seconds), endPlay, v);
         });
         play();
     }
@@ -76,7 +78,7 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
         Integer index = AppContext.getCurrentPlay();
         if (index < AppContext.getPlayList().size()) {
             Music music = AppContext.getPlayList().get(index + 1);
-            play(music.getUrl());
+            play(music);
             AppContext.setCurrentPlay(index + 1);
         }
     }
@@ -87,7 +89,7 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
         Integer index = AppContext.getCurrentPlay();
         if (index > 0) {
             Music music = AppContext.getPlayList().get(index - 1);
-            play(music.getUrl());
+            play(music);
             AppContext.setCurrentPlay(index - 1);
         }
     }

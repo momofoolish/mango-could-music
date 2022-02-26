@@ -20,9 +20,9 @@ public interface IMediaPlayerService {
     /**
      * 播放
      *
-     * @param url 音乐地址
+     * @param music 音乐对象
      */
-    void play(String url);
+    void play(Music music);
 
     /**
      * 继续播放
