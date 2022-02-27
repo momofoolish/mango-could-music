@@ -1,5 +1,6 @@
 package com.jwss.music.entity;
 
+import com.jwss.music.util.TimeUtils;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -74,7 +75,7 @@ public class Music{
     }
 
     public SimpleStringProperty durationProperty() {
-        return duration;
+        return new SimpleStringProperty(TimeUtils.secondsToMin(Integer.parseInt(getDuration())));
     }
 
     public void setDuration(String duration) {
