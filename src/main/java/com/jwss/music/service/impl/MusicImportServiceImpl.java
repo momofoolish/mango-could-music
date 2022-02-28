@@ -47,10 +47,28 @@ public class MusicImportServiceImpl implements IMusicImportService {
     }
 
     @Override
-    public void importMusicByFolder() {
+    public List<Music> importMusicByFolder() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File file = directoryChooser.showDialog(AppContext.getStage());
-        logger.info(file.getPath());
+        File[] listFiles = file.listFiles();
+        if (listFiles != null) {
+            int length = listFiles.length;
+            List<String> urls = new ArrayList<>(length);
+            if (length > 0) {
+                for (File listFile : listFiles) {
+                    String path = listFile.getPath();
+                    if (MusicUtils.isSupportFile(path)) {
+                        urls.add(path);
+                    }
+                }
+            }
+            try {
+                return MusicUtils.readMusicsInfo(urls);
+            } catch (CannotReadException | IOException | ReadOnlyFileException | InvalidAudioFrameException | TagException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
     @Override

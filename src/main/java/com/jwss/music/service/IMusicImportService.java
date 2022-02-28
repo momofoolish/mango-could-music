@@ -25,8 +25,10 @@ public interface IMusicImportService {
 
     /**
      * 导入音乐（遍历文件夹）
+     *
+     * @return 音乐列表
      */
-    void importMusicByFolder();
+    List<Music> importMusicByFolder();
 
     /**
      * 导入音乐（解析JSON）

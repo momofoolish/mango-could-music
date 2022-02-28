@@ -56,13 +56,20 @@ public class MainController {
     @FXML
     protected void onImportMusicClick() {
         List<Music> musicList = musicImportService.importMusic();
-        renderTableView(musicList);
-        cacheService.saveMusicList(musicList);
+        if (musicList.size() > 0) {
+            renderTableView(musicList);
+            cacheService.saveMusicList(musicList);
+        }
     }
 
     @FXML
     protected void onImportMusicClickByFolder() {
-        // TODO 导入文件夹
+        // 导入文件夹
+        List<Music> musicList = musicImportService.importMusicByFolder();
+        if (musicList.size() > 0) {
+            renderTableView(musicList);
+            cacheService.saveMusicList(musicList);
+        }
     }
 
     @FXML

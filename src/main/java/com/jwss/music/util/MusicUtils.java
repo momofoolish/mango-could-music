@@ -54,4 +54,21 @@ public class MusicUtils {
         }
         return musicList;
     }
+
+    /**
+     * 判断是否支持改格式文件
+     *
+     * @param url 文件路径
+     * @return 支持TRUE
+     */
+    public static boolean isSupportFile(String url) {
+        String suffix = "mp3";
+        String reg = "\\.";
+        String[] split = url.split(reg);
+        if (split.length > 0) {
+            return suffix.equals(split[split.length - 1]);
+        } else {
+            return false;
+        }
+    }
 }
