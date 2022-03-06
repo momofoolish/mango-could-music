@@ -1,5 +1,9 @@
 package com.jwss.music.service.impl;
 
+import cn.hutool.core.util.CharsetUtil;
+import cn.hutool.http.Header;
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpUtil;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
 import com.jwss.music.factory.LoggerFactory;
@@ -73,6 +77,8 @@ public class MusicImportServiceImpl implements IMusicImportService {
 
     @Override
     public void importMusicByShare() {
-
+        // String url = "https://live1024.cn";
+        // String result1= HttpUtil.get(url);
+        logger.info(HttpUtil.get("https://www.baidu.com", CharsetUtil.CHARSET_UTF_8));
     }
 }
