@@ -1,8 +1,6 @@
 package com.jwss.music.service.impl;
 
 import cn.hutool.core.util.CharsetUtil;
-import cn.hutool.http.Header;
-import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;

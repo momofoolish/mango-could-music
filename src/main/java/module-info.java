@@ -4,6 +4,7 @@ module com.jwss.music {
     requires javafx.media;
     requires jaudiotagger;
     requires hutool.all;
+    requires okhttps;
 
     opens com.jwss.music to javafx.fxml;
     exports com.jwss.music;
