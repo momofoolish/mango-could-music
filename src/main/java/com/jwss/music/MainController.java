@@ -75,12 +75,7 @@ public class MainController {
 
     @FXML
     protected void onImportMusicClickByShare() {
-        // todo 导入外部分享乐库
-        // Alert alert =new Alert(Alert.AlertType.INFORMATION);
-        // Pane pane =new Pane();
-        // pane.getChildren().add(new TextField("输入路径"));
-        // alert.getDialogPane().setExpandableContent(pane);
-        // alert.show();
+        // 导入外部分享乐库
         musicImportService.importMusicByShare();
     }
 
