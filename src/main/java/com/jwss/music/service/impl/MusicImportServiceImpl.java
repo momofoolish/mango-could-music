@@ -1,5 +1,8 @@
 package com.jwss.music.service.impl;
 
+import cn.hutool.core.lang.PatternPool;
+import cn.hutool.core.lang.RegexPool;
+import cn.hutool.json.JSONUtil;
 import com.ejlchina.okhttps.HTTP;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
@@ -9,8 +12,9 @@ import com.jwss.music.logger.Logger;
 import com.jwss.music.service.ICacheService;
 import com.jwss.music.service.IMusicImportService;
 import com.jwss.music.util.MusicUtils;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -23,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author jwss
@@ -77,14 +82,49 @@ public class MusicImportServiceImpl implements IMusicImportService {
 
     @Override
     public void importMusicByShare() {
-        Alert alert =new Alert(Alert.AlertType.INFORMATION);
-        Pane pane =new Pane();
-        pane.getChildren().add(new TextField("输入路径"));
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setHeight(180);
+        alert.setWidth(345);
+        alert.setTitle("导入网络音乐");
+        alert.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+
+        TextField textField = new TextField();
+        textField.setText("http://");
+        textField.setMinWidth(254);
+
+        Button button = new Button("导入");
+        button.setOnMouseClicked(event -> {
+            String url = textField.getText();
+            Pattern pattern = PatternPool.get(RegexPool.URL);
+            boolean flag = pattern.matcher(url).find();
+            if (flag) {
+                HTTP http = HTTP.builder().baseUrl(url).build();
+                String musicJson = http.sync("/").get().getBody().toString();
+                @SuppressWarnings("unchecked")
+                List<Music> musicList = JSONUtil.toBean(musicJson, List.class);
+                cacheService.saveMusicList(musicList);
+            } else {
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setContentText("非法路径");
+                errorAlert.show();
+            }
+        });
+
+        HBox hBox = new HBox();
+        hBox.setSpacing(10);
+        hBox.setMinWidth(alert.getWidth());
+        hBox.setAlignment(Pos.CENTER);
+        hBox.getChildren().add(textField);
+        hBox.getChildren().add(button);
+
+        Pane pane = new Pane();
+        pane.setMaxHeight(alert.getWidth());
+        pane.getChildren().add(hBox);
+
+        alert.getDialogPane().setExpanded(true);
         alert.getDialogPane().setExpandableContent(pane);
-        alert.show();
-        HTTP http = HTTP.builder()
-                .baseUrl("https://live1024.cn")
-                .build();
-        logger.info(http.sync("/").get().getBody().toString());
+        alert.getDialogPane().setMinWidth(alert.getWidth());
+        alert.getDialogPane().setMinHeight(alert.getHeight());
+        alert.showAndWait();
     }
 }
