@@ -2,8 +2,10 @@ package com.jwss.music.service.impl;
 
 import cn.hutool.core.lang.PatternPool;
 import cn.hutool.core.lang.RegexPool;
+import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
 import com.ejlchina.okhttps.HTTP;
+import com.ejlchina.okhttps.gson.GsonMsgConvertor;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
 import com.jwss.music.factory.LoggerFactory;
@@ -89,7 +91,7 @@ public class MusicImportServiceImpl implements IMusicImportService {
         alert.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 
         TextField textField = new TextField();
-        textField.setText("http://");
+        textField.setText("http://localhost:7777/sra-api/test/musicList");
         textField.setMinWidth(254);
 
         Button button = new Button("导入");
@@ -98,11 +100,12 @@ public class MusicImportServiceImpl implements IMusicImportService {
             Pattern pattern = PatternPool.get(RegexPool.URL);
             boolean flag = pattern.matcher(url).find();
             if (flag) {
-                HTTP http = HTTP.builder().baseUrl(url).build();
-                String musicJson = http.sync("/").get().getBody().toString();
-                @SuppressWarnings("unchecked")
-                List<Music> musicList = JSONUtil.toBean(musicJson, List.class);
-                cacheService.saveMusicList(musicList);
+                HTTP http = HTTP.builder().baseUrl(url).addMsgConvertor(new GsonMsgConvertor()).build();
+                List<Music> musicList = http.sync("/").get().getBody().toList(Music.class);
+                if (musicList != null && musicList.size() > 0) {
+                    cacheService.saveMusicList(musicList);
+                    alert.close();
+                }
             } else {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setContentText("非法路径");

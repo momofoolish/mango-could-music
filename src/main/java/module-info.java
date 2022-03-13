@@ -5,6 +5,7 @@ module com.jwss.music {
     requires jaudiotagger;
     requires hutool.all;
     requires okhttps;
+    requires okhttps.gson;
 
     opens com.jwss.music to javafx.fxml;
     exports com.jwss.music;

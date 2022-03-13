@@ -5,10 +5,10 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * @date 2022-1-24 21:02:20
  * @author jwss
+ * @date 2022-1-24 21:02:20
  */
-public class Music{
+public class Music {
     /**
      * 音乐名称
      */
