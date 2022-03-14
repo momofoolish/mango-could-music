@@ -9,8 +9,13 @@ import com.jwss.music.service.IMediaPlayerService;
 import com.jwss.music.util.TimeUtils;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ListChangeListener;
+import javafx.event.EventHandler;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Callback;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -23,26 +28,6 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
     private final Logger logger = LoggerFactory.getLogger();
 
     private MediaPlayer mediaPlayer = null;
-
-    @Override
-    public ListChangeListener<Music> clickToPlay() {
-        return c -> {
-            String url = c.getList().get(0).getUrl();
-            // 播放
-            play(c.getList().get(0));
-            // 设置当前播放的歌曲
-            List<Music> playList = AppContext.getPlayList();
-            int size = playList.size();
-            for (int i = 0; i < size; i++) {
-                if (url.equals(playList.get(i).getUrl())) {
-                    AppContext.setCurrentPlay(i);
-                    break;
-                } else if (i >= size - 1) {
-                    AppContext.setCurrentPlay(0);
-                }
-            }
-        };
-    }
 
     @Override
     public void play(Music music) {
@@ -102,5 +87,47 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
     @Override
     public void order() {
 
+    }
+
+    @Override
+    public void setEvent(TableView<Music> musicTableView) {
+        musicTableView.setRowFactory(param -> {
+            TableView.TableViewSelectionModel<Music> selectionModel = param.getSelectionModel();
+            logger.info("index="+selectionModel.getFocusedIndex());
+            TableRow<Music> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                // 左键
+                String leftButton = "PRIMARY";
+                // 右键
+                String rightButton = "SECONDARY";
+                // 双击播放
+                int count = 2;
+                if (event.getClickCount() == count && event.getButton().name().equals(leftButton)) {
+                    logger.info("双击了" + param.getItems().get(0).getName());
+
+                    // String url = c.getList().get(0).getUrl();
+                    // // 播放
+                    // play(c.getList().get(0));
+                    // // 设置当前播放的歌曲
+                    // List<Music> playList = AppContext.getPlayList();
+                    // int size = playList.size();
+                    // for (int i = 0; i < size; i++) {
+                    //     if (url.equals(playList.get(i).getUrl())) {
+                    //         AppContext.setCurrentPlay(i);
+                    //         break;
+                    //     } else if (i >= size - 1) {
+                    //         AppContext.setCurrentPlay(0);
+                    //     }
+                    // }
+                }
+                // 右键弹出操作选项
+                if (event.getButton().name().equals(rightButton)) {
+                    logger.info("右键单击了");
+                }
+
+
+            });
+            return row;
+        });
     }
 }

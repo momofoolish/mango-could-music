@@ -2,6 +2,7 @@ package com.jwss.music.service;
 
 import com.jwss.music.entity.Music;
 import javafx.collections.ListChangeListener;
+import javafx.scene.control.TableView;
 
 /**
  * 播放器服务接口
@@ -10,13 +11,6 @@ import javafx.collections.ListChangeListener;
  * @date 2022-1-27 19:16:14
  */
 public interface IMediaPlayerService {
-    /**
-     * 双击表格某项播放
-     *
-     * @return 监听器
-     */
-    ListChangeListener<Music> clickToPlay();
-
     /**
      * 播放
      *
@@ -54,4 +48,9 @@ public interface IMediaPlayerService {
      */
     void order();
 
+    /**
+     * 设置表格事件
+     * @param musicTableView 表格
+     */
+    void setEvent(TableView<Music> musicTableView);
 }
