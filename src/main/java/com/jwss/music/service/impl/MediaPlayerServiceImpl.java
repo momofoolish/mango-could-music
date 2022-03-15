@@ -92,8 +92,6 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
     @Override
     public void setEvent(TableView<Music> musicTableView) {
         musicTableView.setRowFactory(param -> {
-            TableView.TableViewSelectionModel<Music> selectionModel = param.getSelectionModel();
-            logger.info("index="+selectionModel.getFocusedIndex());
             TableRow<Music> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 // 左键
@@ -103,29 +101,25 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
                 // 双击播放
                 int count = 2;
                 if (event.getClickCount() == count && event.getButton().name().equals(leftButton)) {
-                    logger.info("双击了" + param.getItems().get(0).getName());
-
-                    // String url = c.getList().get(0).getUrl();
-                    // // 播放
-                    // play(c.getList().get(0));
-                    // // 设置当前播放的歌曲
-                    // List<Music> playList = AppContext.getPlayList();
-                    // int size = playList.size();
-                    // for (int i = 0; i < size; i++) {
-                    //     if (url.equals(playList.get(i).getUrl())) {
-                    //         AppContext.setCurrentPlay(i);
-                    //         break;
-                    //     } else if (i >= size - 1) {
-                    //         AppContext.setCurrentPlay(0);
-                    //     }
-                    // }
+                    Music music = row.getItem();
+                    // 播放
+                    play(music);
+                    // 设置当前播放的歌曲
+                    List<Music> playList = AppContext.getPlayList();
+                    int size = playList.size();
+                    for (int i = 0; i < size; i++) {
+                        if (music.getUrl().equals(playList.get(i).getUrl())) {
+                            AppContext.setCurrentPlay(i);
+                            break;
+                        } else if (i >= size - 1) {
+                            AppContext.setCurrentPlay(0);
+                        }
+                    }
                 }
                 // 右键弹出操作选项
                 if (event.getButton().name().equals(rightButton)) {
                     logger.info("右键单击了");
                 }
-
-
             });
             return row;
         });

@@ -36,7 +36,7 @@ public class AppContext {
      */
     private static FXMLLoader fxmlLoader;
 
-    public final static String CACHE_FILE = "m_cache.csv";
+    public final static String CACHE_FILE = "./data/m_cache.csv";
 
     public static Integer getCurrentPlay() {
         return currentPlay;

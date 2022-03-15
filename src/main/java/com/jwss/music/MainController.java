@@ -9,15 +9,10 @@ import com.jwss.music.observer.ViewObserver;
 import com.jwss.music.service.ICacheService;
 import com.jwss.music.service.IMediaPlayerService;
 import com.jwss.music.service.IMusicImportService;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.util.Callback;
 
 import java.util.List;
 
@@ -109,7 +104,6 @@ public class MainController {
      */
     @FXML
     protected void initialize() {
-        // musicTableView.getSelectionModel().getSelectedItems().addListener(mediaPlayerService.clickToPlay());
         nameTableColumn.setCellValueFactory(cell -> cell.getValue().nameProperty());
         authorTableColumn.setCellValueFactory(cell -> cell.getValue().authorProperty());
         albumTableColumn.setCellValueFactory(cell -> cell.getValue().albumProperty());
