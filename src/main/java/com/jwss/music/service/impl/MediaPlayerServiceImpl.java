@@ -9,7 +9,10 @@ import com.jwss.music.service.IMediaPlayerService;
 import com.jwss.music.util.TimeUtils;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ListChangeListener;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -81,12 +84,12 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
 
     @Override
     public void random() {
-
+        // todo 随机播放
     }
 
     @Override
     public void order() {
-
+        // todo 顺序播放
     }
 
     @Override
@@ -119,6 +122,17 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
                 // 右键弹出操作选项
                 if (event.getButton().name().equals(rightButton)) {
                     logger.info("右键单击了");
+                    ContextMenu contextMenu = new ContextMenu();
+                    MenuItem itemPlay = new MenuItem("播放");
+                    itemPlay.setOnAction(menuItemEvent -> {
+                        // todo 播放当前项
+                    });
+                    MenuItem itemRemove = new MenuItem("删除");
+                    itemRemove.setOnAction(itemRemoveEvent -> {
+                        // todo 移除这首歌曲
+                    });
+                    contextMenu.getItems().addAll(itemPlay, itemRemove);
+                    contextMenu.show(AppContext.getStage(), event.getScreenX(), event.getScreenY());
                 }
             });
             return row;
