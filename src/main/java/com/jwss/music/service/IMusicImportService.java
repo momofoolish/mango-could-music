@@ -1,12 +1,6 @@
 package com.jwss.music.service;
 
 import com.jwss.music.entity.Music;
-import org.jaudiotagger.audio.exceptions.CannotReadException;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
-import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
-import org.jaudiotagger.tag.TagException;
-
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -34,4 +28,11 @@ public interface IMusicImportService {
      * 导入音乐（解析JSON）
      */
     void importMusicByShare();
+
+    /**
+     * 批量移除音乐
+     * @param musicList 对象列表
+     * @param type 删除类型
+     */
+    void batchRemove(List<Music> musicList, Integer type);
 }

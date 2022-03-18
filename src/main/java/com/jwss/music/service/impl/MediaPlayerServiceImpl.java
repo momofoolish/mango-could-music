@@ -124,9 +124,7 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
                     logger.info("右键单击了");
                     ContextMenu contextMenu = new ContextMenu();
                     MenuItem itemPlay = new MenuItem("播放");
-                    itemPlay.setOnAction(menuItemEvent -> {
-                        // todo 播放当前项
-                    });
+                    itemPlay.setOnAction(menuItemEvent -> play(row.getItem()));
                     MenuItem itemRemove = new MenuItem("删除");
                     itemRemove.setOnAction(itemRemoveEvent -> {
                         // todo 移除这首歌曲

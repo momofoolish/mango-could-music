@@ -130,4 +130,11 @@ public class MusicImportServiceImpl implements IMusicImportService {
         alert.getDialogPane().setMinHeight(alert.getHeight());
         alert.showAndWait();
     }
+
+    @Override
+    public void batchRemove(List<Music> musicList, Integer type) {
+        // 移除列表
+
+        // 删除本地文件
+    }
 }
