@@ -2,15 +2,13 @@ package com.jwss.music.service.impl;
 
 import cn.hutool.core.lang.PatternPool;
 import cn.hutool.core.lang.RegexPool;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONUtil;
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 import com.ejlchina.okhttps.HTTP;
 import com.ejlchina.okhttps.gson.GsonMsgConvertor;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
-import com.jwss.music.factory.LoggerFactory;
 import com.jwss.music.factory.ServiceFactory;
-import com.jwss.music.logger.Logger;
 import com.jwss.music.service.ICacheService;
 import com.jwss.music.service.IMusicImportService;
 import com.jwss.music.util.MusicUtils;
@@ -35,7 +33,7 @@ import java.util.regex.Pattern;
  * @author jwss
  */
 public class MusicImportServiceImpl implements IMusicImportService {
-    private final Logger logger = LoggerFactory.getLogger();
+    private final Log logger = LogFactory.get();
 
     private final ICacheService cacheService = ServiceFactory.getCacheService();
 

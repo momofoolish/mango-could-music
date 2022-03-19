@@ -1,20 +1,15 @@
 package com.jwss.test;
 
-import com.ejlchina.okhttps.HTTP;
-import com.jwss.music.factory.LoggerFactory;
-import com.jwss.music.logger.Logger;
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 
 /**
  * @author jwss
  */
 public class JunitTest {
-    private static final Logger logger = LoggerFactory.getLogger();
+    private static final Log logger = LogFactory.get();
 
     public static void main(String[] args) {
-        logger.info("zhangsan");
-        logger.warn("死循环");
-        logger.error("内存泄漏");
-
         // HTTP http = HTTP.builder()
         //         .baseUrl("https://www.baidu.com")
         //         .build();

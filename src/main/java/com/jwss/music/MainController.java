@@ -1,10 +1,10 @@
 package com.jwss.music;
 
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
-import com.jwss.music.factory.LoggerFactory;
 import com.jwss.music.factory.ServiceFactory;
-import com.jwss.music.logger.Logger;
 import com.jwss.music.observer.ViewObserver;
 import com.jwss.music.service.ICacheService;
 import com.jwss.music.service.IMediaPlayerService;
@@ -21,7 +21,7 @@ import java.util.List;
  * @date 2022-2-6 22:13:40
  */
 public class MainController {
-    private static final Logger logger = LoggerFactory.getLogger();
+    private static final Log logger = LogFactory.get();
 
     @FXML
     private TableView<Music> musicTableView;

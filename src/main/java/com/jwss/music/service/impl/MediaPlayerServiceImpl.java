@@ -1,24 +1,19 @@
 package com.jwss.music.service.impl;
 
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
-import com.jwss.music.factory.LoggerFactory;
-import com.jwss.music.logger.Logger;
 import com.jwss.music.observer.ViewObserver;
 import com.jwss.music.service.IMediaPlayerService;
 import com.jwss.music.util.TimeUtils;
 import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.collections.ListChangeListener;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Callback;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -28,7 +23,7 @@ import java.util.List;
  * @author jwss
  */
 public class MediaPlayerServiceImpl implements IMediaPlayerService {
-    private final Logger logger = LoggerFactory.getLogger();
+    private final Log logger = LogFactory.get();
 
     private MediaPlayer mediaPlayer = null;
 
@@ -125,11 +120,15 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
                     ContextMenu contextMenu = new ContextMenu();
                     MenuItem itemPlay = new MenuItem("播放");
                     itemPlay.setOnAction(menuItemEvent -> play(row.getItem()));
-                    MenuItem itemRemove = new MenuItem("删除");
+                    MenuItem itemRemove = new MenuItem("移除");
                     itemRemove.setOnAction(itemRemoveEvent -> {
                         // todo 移除这首歌曲
                     });
-                    contextMenu.getItems().addAll(itemPlay, itemRemove);
+                    MenuItem itemDeleteFile = new MenuItem("删除本地文件");
+                    itemDeleteFile.setOnAction(itemDeleteFileEvent -> {
+                        // todo 删除本地文件
+                    });
+                    contextMenu.getItems().addAll(itemPlay, itemRemove, itemDeleteFile);
                     contextMenu.show(AppContext.getStage(), event.getScreenX(), event.getScreenY());
                 }
             });
