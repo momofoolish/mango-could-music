@@ -1,6 +1,8 @@
 package com.jwss.music.service;
 
 import com.jwss.music.entity.Music;
+import com.jwss.music.enums.DeleteMusicType;
+
 import java.util.List;
 
 /**
@@ -34,5 +36,5 @@ public interface IMusicImportService {
      * @param musicList 对象列表
      * @param type 删除类型
      */
-    void batchRemove(List<Music> musicList, Integer type);
+    void batchRemove(List<Music> musicList, DeleteMusicType type);
 }

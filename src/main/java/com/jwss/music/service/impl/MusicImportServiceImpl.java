@@ -8,6 +8,7 @@ import com.ejlchina.okhttps.HTTP;
 import com.ejlchina.okhttps.gson.GsonMsgConvertor;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
+import com.jwss.music.enums.DeleteMusicType;
 import com.jwss.music.factory.ServiceFactory;
 import com.jwss.music.service.ICacheService;
 import com.jwss.music.service.IMusicImportService;
@@ -130,9 +131,18 @@ public class MusicImportServiceImpl implements IMusicImportService {
     }
 
     @Override
-    public void batchRemove(List<Music> musicList, Integer type) {
-        // 移除列表
-
-        // 删除本地文件
+    public void batchRemove(List<Music> musicList, DeleteMusicType type) {
+        if (DeleteMusicType.REMOVE_LIST == type) {
+            // todo 从列表移除
+            logger.info("从列表移除");
+        } else if (DeleteMusicType.REMOVE_LOCAL == type) {
+            // todo 删除本地文件
+            logger.info("删除本地文件");
+        } else if (DeleteMusicType.REMOVE_LIST_LOCAL == type) {
+            // todo 从列表移除并删除本地文件
+            logger.info("从列表移除并删除本地文件");
+        } else {
+            logger.error("类型异常，需使用枚举类DeleteMusicType");
+        }
     }
 }

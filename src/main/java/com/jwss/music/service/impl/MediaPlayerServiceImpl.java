@@ -4,8 +4,11 @@ import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
+import com.jwss.music.enums.DeleteMusicType;
+import com.jwss.music.factory.ServiceFactory;
 import com.jwss.music.observer.ViewObserver;
 import com.jwss.music.service.IMediaPlayerService;
+import com.jwss.music.service.IMusicImportService;
 import com.jwss.music.util.TimeUtils;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.scene.control.ContextMenu;
@@ -26,6 +29,8 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
     private final Log logger = LogFactory.get();
 
     private MediaPlayer mediaPlayer = null;
+
+    private IMusicImportService musicImportService = ServiceFactory.getMusicImport();
 
     @Override
     public void play(Music music) {
@@ -120,15 +125,22 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
                     ContextMenu contextMenu = new ContextMenu();
                     MenuItem itemPlay = new MenuItem("播放");
                     itemPlay.setOnAction(menuItemEvent -> play(row.getItem()));
-                    MenuItem itemRemove = new MenuItem("移除");
+                    MenuItem itemRemove = new MenuItem("从列表移除");
                     itemRemove.setOnAction(itemRemoveEvent -> {
                         // todo 移除这首歌曲
+                        musicImportService.batchRemove(null, DeleteMusicType.REMOVE_LIST);
                     });
                     MenuItem itemDeleteFile = new MenuItem("删除本地文件");
                     itemDeleteFile.setOnAction(itemDeleteFileEvent -> {
                         // todo 删除本地文件
+                        musicImportService.batchRemove(null, DeleteMusicType.REMOVE_LOCAL);
                     });
-                    contextMenu.getItems().addAll(itemPlay, itemRemove, itemDeleteFile);
+                    MenuItem itemRemoveAndDeleteFile = new MenuItem("从列表移除并删除本地文件");
+                    itemRemoveAndDeleteFile.setOnAction(itemRemoveAndDeleteFileEvent -> {
+                        // todo 从列表移除并删除本地文件
+                        musicImportService.batchRemove(null, DeleteMusicType.REMOVE_LIST_LOCAL);
+                    });
+                    contextMenu.getItems().addAll(itemPlay, itemRemove, itemDeleteFile, itemRemoveAndDeleteFile);
                     contextMenu.show(AppContext.getStage(), event.getScreenX(), event.getScreenY());
                 }
             });
