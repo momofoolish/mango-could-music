@@ -2,6 +2,7 @@ package com.jwss.music.service.impl;
 
 import cn.hutool.core.lang.PatternPool;
 import cn.hutool.core.lang.RegexPool;
+import cn.hutool.core.text.csv.CsvUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import com.ejlchina.okhttps.HTTP;
@@ -10,6 +11,7 @@ import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
 import com.jwss.music.enums.DeleteMusicType;
 import com.jwss.music.factory.ServiceFactory;
+import com.jwss.music.observer.ViewDataObserver;
 import com.jwss.music.service.ICacheService;
 import com.jwss.music.service.IMusicImportService;
 import com.jwss.music.util.MusicUtils;
@@ -135,14 +137,33 @@ public class MusicImportServiceImpl implements IMusicImportService {
         if (DeleteMusicType.REMOVE_LIST == type) {
             // todo 从列表移除
             logger.info("从列表移除");
+            int size = musicList.size();
+            int[] indexArray = new int[size];
+            List<Music> playList = AppContext.getPlayList();
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < playList.size(); j++) {
+                    if (musicList.get(i).getUrl().equals(playList.get(j).getUrl())) {
+                        indexArray[i] = j;
+                        break;
+                    }
+                }
+            }
+            for (int index : indexArray) {
+                AppContext.getPlayList().remove(index);
+                ViewDataObserver.musicObservableList.remove(index);
+                logger.info("url =" + AppContext.getPlayList().get(index).getUrl());
+            }
+            cacheService.saveNewList(ViewDataObserver.musicObservableList);
+            // 移除所在csv和表格
         } else if (DeleteMusicType.REMOVE_LOCAL == type) {
             // todo 删除本地文件
             logger.info("删除本地文件");
+
         } else if (DeleteMusicType.REMOVE_LIST_LOCAL == type) {
             // todo 从列表移除并删除本地文件
             logger.info("从列表移除并删除本地文件");
         } else {
-            logger.error("类型异常，需使用枚举类DeleteMusicType");
+            logger.error("类型异常：需使用枚举类DeleteMusicType");
         }
     }
 }

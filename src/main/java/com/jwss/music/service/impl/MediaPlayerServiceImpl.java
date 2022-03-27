@@ -20,6 +20,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -103,8 +104,8 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
                 String rightButton = "SECONDARY";
                 // 双击播放
                 int count = 2;
+                Music music = row.getItem();
                 if (event.getClickCount() == count && event.getButton().name().equals(leftButton)) {
-                    Music music = row.getItem();
                     // 播放
                     play(music);
                     // 设置当前播放的歌曲
@@ -126,19 +127,21 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
                     MenuItem itemPlay = new MenuItem("播放");
                     itemPlay.setOnAction(menuItemEvent -> play(row.getItem()));
                     MenuItem itemRemove = new MenuItem("从列表移除");
+                    ArrayList<Music> ls = new ArrayList<>(1);
+                    ls.add(music);
                     itemRemove.setOnAction(itemRemoveEvent -> {
                         // todo 移除这首歌曲
-                        musicImportService.batchRemove(null, DeleteMusicType.REMOVE_LIST);
+                        musicImportService.batchRemove(ls, DeleteMusicType.REMOVE_LIST);
                     });
                     MenuItem itemDeleteFile = new MenuItem("删除本地文件");
                     itemDeleteFile.setOnAction(itemDeleteFileEvent -> {
                         // todo 删除本地文件
-                        musicImportService.batchRemove(null, DeleteMusicType.REMOVE_LOCAL);
+                        musicImportService.batchRemove(ls, DeleteMusicType.REMOVE_LOCAL);
                     });
                     MenuItem itemRemoveAndDeleteFile = new MenuItem("从列表移除并删除本地文件");
                     itemRemoveAndDeleteFile.setOnAction(itemRemoveAndDeleteFileEvent -> {
                         // todo 从列表移除并删除本地文件
-                        musicImportService.batchRemove(null, DeleteMusicType.REMOVE_LIST_LOCAL);
+                        musicImportService.batchRemove(ls, DeleteMusicType.REMOVE_LIST_LOCAL);
                     });
                     contextMenu.getItems().addAll(itemPlay, itemRemove, itemDeleteFile, itemRemoveAndDeleteFile);
                     contextMenu.show(AppContext.getStage(), event.getScreenX(), event.getScreenY());

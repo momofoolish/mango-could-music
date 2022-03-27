@@ -6,7 +6,9 @@ import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
 import com.jwss.music.service.ICacheService;
 
+import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +16,15 @@ import java.util.List;
  * @author jwss
  */
 public class CacheServiceImpl implements ICacheService {
+    private CsvWriter writer = null;
+
+    private CsvReader reader = null;
+
     @Override
     public void saveMusicList(List<Music> musicList) {
-        CsvWriter writer = CsvUtil.getWriter(AppContext.CACHE_FILE, StandardCharsets.UTF_8);
+        if (writer == null) {
+            writer = CsvUtil.getWriter(AppContext.CACHE_FILE, StandardCharsets.UTF_8);
+        }
         musicList.forEach(item -> writer.writeLine(
                 item.getName(), item.getAuthor(), item.getAlbum(), String.valueOf(item.getDuration()), item.getSize(),
                 item.getUrl())
@@ -26,7 +34,9 @@ public class CacheServiceImpl implements ICacheService {
 
     @Override
     public List<Music> getMusicList() {
-        CsvReader reader = CsvUtil.getReader();
+        if (reader == null) {
+            reader = CsvUtil.getReader();
+        }
         List<CsvRow> rows = reader.read(FileUtil.file(AppContext.CACHE_FILE)).getRows();
         List<Music> musicList = new ArrayList<>(rows.size());
         rows.forEach(item -> {
@@ -40,5 +50,11 @@ public class CacheServiceImpl implements ICacheService {
             musicList.add(music);
         });
         return musicList;
+    }
+
+    @Override
+    public void saveNewList(List<Music> musicList) {
+        FileUtil.clean(AppContext.CACHE_FILE);
+        saveMusicList(musicList);
     }
 }

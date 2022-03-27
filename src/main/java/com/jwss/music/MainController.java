@@ -5,6 +5,7 @@ import cn.hutool.log.LogFactory;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
 import com.jwss.music.factory.ServiceFactory;
+import com.jwss.music.observer.ViewDataObserver;
 import com.jwss.music.observer.ViewObserver;
 import com.jwss.music.service.ICacheService;
 import com.jwss.music.service.IMediaPlayerService;
@@ -127,5 +128,6 @@ public class MainController {
         musicObservableList.addAll(musicList);
         mediaPlayerService.setEvent(musicTableView);
         musicTableView.setItems(musicObservableList);
+        ViewDataObserver.musicObservableList = musicObservableList;
     }
 }

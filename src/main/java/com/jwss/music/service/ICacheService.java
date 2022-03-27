@@ -24,4 +24,10 @@ public interface ICacheService {
      * @return 音乐列表
      */
     List<Music> getMusicList();
+
+    /**
+     * 保存新列表
+     * @param musicList 新列表
+     */
+    void saveNewList(List<Music> musicList);
 }
