@@ -6,7 +6,8 @@ module com.jwss.music {
     requires hutool.all;
     requires okhttps;
     requires okhttps.gson;
+    requires java.sql;
+    requires org.xerial.sqlitejdbc;
 
-    opens com.jwss.music to javafx.fxml;
     exports com.jwss.music;
 }

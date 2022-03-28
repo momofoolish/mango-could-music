@@ -153,7 +153,7 @@ public class MusicImportServiceImpl implements IMusicImportService {
                 ViewDataObserver.musicObservableList.remove(index);
                 logger.info("url =" + AppContext.getPlayList().get(index).getUrl());
             }
-            cacheService.saveNewList(ViewDataObserver.musicObservableList);
+            cacheService.saveNewList(musicList);
             // 移除所在csv和表格
         } else if (DeleteMusicType.REMOVE_LOCAL == type) {
             // todo 删除本地文件

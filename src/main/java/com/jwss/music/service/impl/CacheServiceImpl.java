@@ -1,24 +1,30 @@
 package com.jwss.music.service.impl;
 
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.file.FileWriter;
 import cn.hutool.core.text.csv.*;
+import cn.hutool.core.util.CharsetUtil;
+import cn.hutool.core.util.HexUtil;
+import cn.hutool.json.JSONUtil;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
 import com.jwss.music.service.ICacheService;
 
-import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.NoSuchFileException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author jwss
  */
 public class CacheServiceImpl implements ICacheService {
+    private final String SPEC = "-LIST";
+
     private CsvWriter writer = null;
 
     private CsvReader reader = null;
+
+
+    private FileWriter fileWriter = null;
 
     @Override
     public void saveMusicList(List<Music> musicList) {
@@ -54,7 +60,7 @@ public class CacheServiceImpl implements ICacheService {
 
     @Override
     public void saveNewList(List<Music> musicList) {
-        FileUtil.clean(AppContext.CACHE_FILE);
-        saveMusicList(musicList);
+        fileWriter = new FileWriter("./data/cache");
+        fileWriter.write(Arrays.toString(musicList.toArray()));
     }
 }
