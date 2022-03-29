@@ -1,6 +1,7 @@
 package com.jwss.music;
 
 import com.jwss.music.entity.AppContext;
+import com.jwss.music.util.SqliteUtils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,6 +22,7 @@ public class MainApplication extends Application {
         stage.setTitle("MusicEverywhere");
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(event -> SqliteUtils.close());
         // 将场景放入上下文
         AppContext.setFxmlLoader(fxmlLoader);
         AppContext.setStage(stage);
