@@ -9,5 +9,6 @@ module com.jwss.music {
     requires java.sql;
     requires org.xerial.sqlitejdbc;
 
+    opens com.jwss.music to javafx.fxml;
     exports com.jwss.music;
 }

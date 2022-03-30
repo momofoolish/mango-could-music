@@ -12,4 +12,8 @@
 [{"duration":"180","size":"3000","author":"Aimer","album":"残響散歌 / 朝が来る","name":"残響散歌","url":"http://残響散歌.mp3"}]
 ```
 
-#### 贡献代码
+#### 🍫 参与贡献
+1. Fork 本仓库
+2. 新建 Feat_xxx 分支
+3. 提交代码
+4. 新建 Pull Request

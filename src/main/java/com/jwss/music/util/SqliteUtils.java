@@ -11,7 +11,7 @@ import java.sql.*;
 public class SqliteUtils {
     private static Connection connection = null;
     private static Statement statement = null;
-    private static final String url = "jdbc:sqlite:./data/mev-ml-cache.db";
+    private static final String URL = "jdbc:sqlite:./data/mev-ml-cache.db";
 
     /**
      * 获取数据库操作对象
@@ -22,7 +22,7 @@ public class SqliteUtils {
             return statement;
         } else {
             try {
-                connection = DriverManager.getConnection(url);
+                connection = DriverManager.getConnection(URL);
                 statement = connection.createStatement();
                 statement.setQueryTimeout(30);
                 return statement;

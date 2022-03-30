@@ -1,65 +1,65 @@
 package com.jwss.music.service.impl;
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.io.file.FileWriter;
-import cn.hutool.core.text.csv.*;
-import cn.hutool.core.util.CharsetUtil;
-import cn.hutool.core.util.HexUtil;
-import cn.hutool.json.JSONUtil;
-import com.jwss.music.entity.AppContext;
+import cn.hutool.log.Log;
 import com.jwss.music.entity.Music;
 import com.jwss.music.service.ICacheService;
+import com.jwss.music.util.SqliteUtils;
 
-import java.nio.charset.StandardCharsets;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 /**
  * @author jwss
  */
 public class CacheServiceImpl implements ICacheService {
-    private final String SPEC = "-LIST";
-
-    private CsvWriter writer = null;
-
-    private CsvReader reader = null;
-
-    private FileWriter fileWriter = null;
+    private final Log logger = Log.get();
 
     @Override
     public void saveMusicList(List<Music> musicList) {
-        if (writer == null) {
-            writer = CsvUtil.getWriter(AppContext.CACHE_FILE, StandardCharsets.UTF_8);
-        }
-        musicList.forEach(item -> writer.writeLine(
-                item.getName(), item.getAuthor(), item.getAlbum(), String.valueOf(item.getDuration()), item.getSize(),
-                item.getUrl())
-        );
-        writer.close();
+        Statement statement = SqliteUtils.getStatement();
+        musicList.forEach(item -> {
+            try {
+                if (statement != null) {
+                    String sql = String.format(
+                            "insert into ml_main(ID,NAME,AUTHOR,ALBUM,DURATION,SIZE,URL)values('%s','%s','%s','%s','%s','%s','%s')"
+                            , UUID.randomUUID()
+                            , item.getName(), item.getAuthor(), item.getAlbum(), item.getDuration()
+                            , item.getSize(), item.getUrl()
+                    );
+                    logger.info(sql);
+                    statement.executeUpdate(sql);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        SqliteUtils.close();
     }
 
     @Override
     public List<Music> getMusicList() {
-        if (reader == null) {
-            reader = CsvUtil.getReader();
+        List<Music> musicList = new ArrayList<>();
+        Statement statement = SqliteUtils.getStatement();
+        try {
+            if (statement != null) {
+                ResultSet rs = statement.executeQuery("select * from ml_main");
+                while (rs.next()) {
+                    Music music = new Music();
+                    music.setName(rs.getString("NAME"));
+                    music.setAuthor(rs.getString("AUTHOR"));
+                    music.setAlbum(rs.getString("ALBUM"));
+                    music.setDuration(rs.getString("DURATION"));
+                    music.setSize(rs.getString("SIZE"));
+                    music.setUrl(rs.getString("URL"));
+                    musicList.add(music);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        List<CsvRow> rows = reader.read(FileUtil.file(AppContext.CACHE_FILE)).getRows();
-        List<Music> musicList = new ArrayList<>(rows.size());
-        rows.forEach(item -> {
-            Music music = new Music();
-            music.setName(item.get(0));
-            music.setAuthor(item.get(1));
-            music.setAlbum(item.get(2));
-            music.setDuration(item.get(3));
-            music.setSize(item.get(4));
-            music.setUrl(item.get(5));
-            musicList.add(music);
-        });
         return musicList;
     }
 
-    @Override
-    public void saveNewList(List<Music> musicList) {
-        fileWriter = new FileWriter("./data/cache");
-        fileWriter.write(Arrays.toString(musicList.toArray()));
-    }
 }
