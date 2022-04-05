@@ -31,7 +31,7 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
 
     private MediaPlayer mediaPlayer = null;
 
-    private IMusicImportService musicImportService = ServiceFactory.getMusicImport();
+    private final IMusicImportService musicImportService = ServiceFactory.getMusicImport();
 
     @Override
     public void play(Music music) {
@@ -95,16 +95,16 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
 
     @Override
     public void setEvent(TableView<Music> musicTableView) {
+        // 左键
+        String leftButton = "PRIMARY";
+        // 右键
+        String rightButton = "SECONDARY";
         musicTableView.setRowFactory(param -> {
             TableRow<Music> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                // 左键
-                String leftButton = "PRIMARY";
-                // 右键
-                String rightButton = "SECONDARY";
-                // 双击播放
                 int count = 2;
                 Music music = row.getItem();
+                // 双击播放
                 if (event.getClickCount() == count && event.getButton().name().equals(leftButton)) {
                     // 播放
                     play(music);
@@ -125,7 +125,7 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
                     logger.info("右键单击了");
                     ContextMenu contextMenu = new ContextMenu();
                     MenuItem itemPlay = new MenuItem("播放");
-                    itemPlay.setOnAction(menuItemEvent -> play(row.getItem()));
+                    itemPlay.setOnAction(menuItemEvent -> play(music));
                     MenuItem itemRemove = new MenuItem("从列表移除");
                     ArrayList<Music> ls = new ArrayList<>(1);
                     ls.add(music);

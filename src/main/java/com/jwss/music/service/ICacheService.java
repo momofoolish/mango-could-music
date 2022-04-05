@@ -25,4 +25,10 @@ public interface ICacheService {
      */
     List<Music> getMusicList();
 
+    /**
+     * 批量移除
+     * @param idList 列表id
+     * @return
+     */
+    boolean removeBatch(List<String> idList);
 }

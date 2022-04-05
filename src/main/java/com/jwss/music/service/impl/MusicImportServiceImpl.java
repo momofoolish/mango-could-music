@@ -2,7 +2,6 @@ package com.jwss.music.service.impl;
 
 import cn.hutool.core.lang.PatternPool;
 import cn.hutool.core.lang.RegexPool;
-import cn.hutool.core.text.csv.CsvUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import com.ejlchina.okhttps.HTTP;
@@ -134,9 +133,13 @@ public class MusicImportServiceImpl implements IMusicImportService {
 
     @Override
     public void batchRemove(List<Music> musicList, DeleteMusicType type) {
+        if (musicList.size() <= 0) {
+            return;
+        }
+        List<String> idList = new ArrayList<>(musicList.size());
+        musicList.forEach(i -> idList.add(i.getId()));
+
         if (DeleteMusicType.REMOVE_LIST == type) {
-            // todo 从列表移除
-            logger.info("从列表移除");
             int size = musicList.size();
             int[] indexArray = new int[size];
             List<Music> playList = AppContext.getPlayList();
@@ -148,13 +151,14 @@ public class MusicImportServiceImpl implements IMusicImportService {
                     }
                 }
             }
+            // 移除对应表格项
             for (int index : indexArray) {
                 AppContext.getPlayList().remove(index);
                 ViewDataObserver.musicObservableList.remove(index);
                 logger.info("url =" + AppContext.getPlayList().get(index).getUrl());
             }
-            cacheService.saveNewList(musicList);
-            // 移除所在csv和表格
+            // 移除在所在数据库的
+            cacheService.removeBatch(idList);
         } else if (DeleteMusicType.REMOVE_LOCAL == type) {
             // todo 删除本地文件
             logger.info("删除本地文件");

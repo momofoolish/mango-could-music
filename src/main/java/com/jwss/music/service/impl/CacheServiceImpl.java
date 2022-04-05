@@ -47,6 +47,7 @@ public class CacheServiceImpl implements ICacheService {
                 ResultSet rs = statement.executeQuery("select * from ml_main");
                 while (rs.next()) {
                     Music music = new Music();
+                    music.setId(rs.getString("ID"));
                     music.setName(rs.getString("NAME"));
                     music.setAuthor(rs.getString("AUTHOR"));
                     music.setAlbum(rs.getString("ALBUM"));
@@ -60,6 +61,22 @@ public class CacheServiceImpl implements ICacheService {
             e.printStackTrace();
         }
         return musicList;
+    }
+
+    @Override
+    public boolean removeBatch(List<String> idList) {
+        Statement statement = SqliteUtils.getStatement();
+        if (statement == null || idList.size() <= 0) {
+            return false;
+        }
+        idList.forEach(id->{
+            try {
+                statement.execute(String.format("delete from ml_main where ID = '%s'", id));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        return false;
     }
 
 }

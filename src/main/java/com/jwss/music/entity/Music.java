@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @date 2022-1-24 21:02:20
  */
 public class Music {
+    private final SimpleStringProperty id = new SimpleStringProperty();
     /**
      * 音乐名称
      */
@@ -33,6 +34,18 @@ public class Music {
      * 存放位置
      */
     private final SimpleStringProperty url = new SimpleStringProperty();
+
+    public String getId() {
+        return id.get();
+    }
+
+    public SimpleStringProperty idProperty() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id.set(id);
+    }
 
     public String getName() {
         return name.get();

@@ -36,6 +36,8 @@ public class MainController {
     private TableColumn<Music, String> durationTableColumn;
     @FXML
     private TableColumn<Music, String> sizeTableColumn;
+    @FXML
+    private TableColumn<Music, String> idTableColumn;
 
     @FXML
     private ProgressBar musicPlayProgress;
