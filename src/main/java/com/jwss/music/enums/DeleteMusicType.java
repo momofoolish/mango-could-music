@@ -13,9 +13,5 @@ public enum DeleteMusicType {
     /**
      * 删除本地文件
      */
-    REMOVE_LOCAL,
-    /**
-     * 移除列表并删除本地文件
-     */
-    REMOVE_LIST_LOCAL
+    REMOVE_LOCAL
 }

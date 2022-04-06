@@ -122,28 +122,25 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
                 }
                 // 右键弹出操作选项
                 if (event.getButton().name().equals(rightButton)) {
-                    logger.info("右键单击了");
-                    ContextMenu contextMenu = new ContextMenu();
                     MenuItem itemPlay = new MenuItem("播放");
                     itemPlay.setOnAction(menuItemEvent -> play(music));
+
                     MenuItem itemRemove = new MenuItem("从列表移除");
                     ArrayList<Music> ls = new ArrayList<>(1);
                     ls.add(music);
                     itemRemove.setOnAction(itemRemoveEvent -> {
-                        // todo 移除这首歌曲
+                        // 移除这首歌曲
                         musicImportService.batchRemove(ls, DeleteMusicType.REMOVE_LIST);
                     });
+
                     MenuItem itemDeleteFile = new MenuItem("删除本地文件");
                     itemDeleteFile.setOnAction(itemDeleteFileEvent -> {
-                        // todo 删除本地文件
+                        // 删除本地文件
                         musicImportService.batchRemove(ls, DeleteMusicType.REMOVE_LOCAL);
                     });
-                    MenuItem itemRemoveAndDeleteFile = new MenuItem("从列表移除并删除本地文件");
-                    itemRemoveAndDeleteFile.setOnAction(itemRemoveAndDeleteFileEvent -> {
-                        // todo 从列表移除并删除本地文件
-                        musicImportService.batchRemove(ls, DeleteMusicType.REMOVE_LIST_LOCAL);
-                    });
-                    contextMenu.getItems().addAll(itemPlay, itemRemove, itemDeleteFile, itemRemoveAndDeleteFile);
+                    // 菜单容器
+                    ContextMenu contextMenu = new ContextMenu();
+                    contextMenu.getItems().addAll(itemPlay, itemRemove, itemDeleteFile);
                     contextMenu.show(AppContext.getStage(), event.getScreenX(), event.getScreenY());
                 }
             });

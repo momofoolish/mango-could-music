@@ -1,5 +1,6 @@
 package com.jwss.music.service.impl;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.PatternPool;
 import cn.hutool.core.lang.RegexPool;
 import cn.hutool.log.Log;
@@ -24,6 +25,7 @@ import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.TagException;
+import org.sqlite.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -138,7 +140,6 @@ public class MusicImportServiceImpl implements IMusicImportService {
         }
         List<String> idList = new ArrayList<>(musicList.size());
         musicList.forEach(i -> idList.add(i.getId()));
-
         if (DeleteMusicType.REMOVE_LIST == type) {
             int size = musicList.size();
             int[] indexArray = new int[size];
@@ -160,12 +161,14 @@ public class MusicImportServiceImpl implements IMusicImportService {
             // 移除在所在数据库的
             cacheService.removeBatch(idList);
         } else if (DeleteMusicType.REMOVE_LOCAL == type) {
-            // todo 删除本地文件
-            logger.info("删除本地文件");
-
-        } else if (DeleteMusicType.REMOVE_LIST_LOCAL == type) {
-            // todo 从列表移除并删除本地文件
-            logger.info("从列表移除并删除本地文件");
+            // 删除本地文件
+            musicList.forEach(item -> {
+                if (item.getUrl() != null && !"".equals(item.getUrl())) {
+                    FileUtil.del(item.getUrl());
+                }
+            });
+            // 移除在所在数据库的
+            cacheService.removeBatch(idList);
         } else {
             logger.error("类型异常：需使用枚举类DeleteMusicType");
         }
