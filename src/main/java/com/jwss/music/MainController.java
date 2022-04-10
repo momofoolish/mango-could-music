@@ -14,6 +14,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.List;
 
@@ -46,11 +48,20 @@ public class MainController {
 
     @FXML
     private Button playOrPauseMusicBtn;
+    @FXML
+    private Button previewBtn;
+    @FXML
+    private Button nextBtn;
+
+    @FXML
+    private Button simpleImportButton;
+    @FXML
+    private Button folderImportButton;
+    @FXML
+    private Button webImportButton;
 
     private final IMediaPlayerService mediaPlayerService = ServiceFactory.getMediaPlayer();
-
     private final IMusicImportService musicImportService = ServiceFactory.getMusicImport();
-
     private final ICacheService cacheService = ServiceFactory.getCacheService();
 
     @FXML
@@ -113,16 +124,32 @@ public class MainController {
         sizeTableColumn.setCellValueFactory(cell -> cell.getValue().sizeProperty());
         // 设置宽度百分比
         nameTableColumn.prefWidthProperty().bind(musicTableView.widthProperty().multiply(0.2));
-        authorTableColumn.prefWidthProperty().bind(musicTableView.widthProperty().multiply(0.3));
+        authorTableColumn.prefWidthProperty().bind(musicTableView.widthProperty().multiply(0.28));
         albumTableColumn.prefWidthProperty().bind(musicTableView.widthProperty().multiply(0.3));
         durationTableColumn.prefWidthProperty().bind(musicTableView.widthProperty().multiply(0.1));
-        sizeTableColumn.prefWidthProperty().bind(musicTableView.widthProperty().multiply(0.092));
+        sizeTableColumn.prefWidthProperty().bind(musicTableView.widthProperty().multiply(0.1));
         // 设置不可以更改大小
         nameTableColumn.setResizable(false);
         authorTableColumn.setResizable(false);
         albumTableColumn.setResizable(false);
         durationTableColumn.setResizable(false);
         sizeTableColumn.setResizable(false);
+
+        // 导入按钮
+        ImageView importView = new ImageView(new Image("file:icons/import.png"));
+        ImageView folderView = new ImageView(new Image("file:icons/folder.png"));
+        ImageView webView = new ImageView(new Image("file:icons/web.png"));
+        simpleImportButton.setGraphic(importView);
+        folderImportButton.setGraphic(folderView);
+        webImportButton.setGraphic(webView);
+
+        // 播放器按钮
+        ImageView playView = new ImageView(new Image("file:icons/play.png"));
+        ImageView nextView = new ImageView(new Image("file:icons/next.png"));
+        ImageView previewView = new ImageView(new Image("file:icons/preview.png"));
+        playOrPauseMusicBtn.setGraphic(playView);
+        previewBtn.setGraphic(previewView);
+        nextBtn.setGraphic(nextView);
 
         // 加载本地音乐
         renderTableView(cacheService.getMusicList());

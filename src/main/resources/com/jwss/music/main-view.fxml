@@ -11,9 +11,12 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jwss.music.MainController" styleClass="container">
     <top>
         <HBox spacing="1" styleClass="top-button-box">
-            <Button styleClass="top-option-button button" onMouseClicked="#onImportMusicClick" text="导入音乐"/>
-            <Button styleClass="top-option-button button" onMouseClicked="#onImportMusicClickByFolder" text="导入本地乐库"/>
-            <Button styleClass="top-option-button button" onMouseClicked="#onImportMusicClickByShare" text="导入分享乐库"/>
+            <Button styleClass="top-option-button" fx:id="simpleImportButton" onMouseClicked="#onImportMusicClick"
+                    text="文件导入"/>
+            <Button styleClass="top-option-button" fx:id="folderImportButton"
+                    onMouseClicked="#onImportMusicClickByFolder" text="文件夹导入"/>
+            <Button styleClass="top-option-button" fx:id="webImportButton" onMouseClicked="#onImportMusicClickByShare"
+                    text="外部导入"/>
         </HBox>
     </top>
 
@@ -32,9 +35,9 @@
     <bottom>
         <VBox styleClass="bottom">
             <HBox styleClass="bottom-control" alignment="center" spacing="10">
-                <Button styleClass="button" onMouseClicked="#onPreview" text="⏮"/>
-                <Button styleClass="button" onMouseClicked="#onPlayOrPause" fx:id="playOrPauseMusicBtn" text="▶"/>
-                <Button styleClass="button" onMouseClicked="#onNext" text="⏭"/>
+                <Button onMouseClicked="#onPreview" fx:id="previewBtn"/>
+                <Button onMouseClicked="#onPlayOrPause" fx:id="playOrPauseMusicBtn"/>
+                <Button onMouseClicked="#onNext" fx:id="nextBtn"/>
             </HBox>
             <HBox styleClass="bottom-progress" alignment="center" spacing="6">
                 <Label text="00:12" fx:id="currentPlayLabel" styleClass="current-play-label"/>

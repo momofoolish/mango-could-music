@@ -3,6 +3,8 @@ package com.jwss.music.observer;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * 视图对象观测器
@@ -24,7 +26,8 @@ public class ViewObserver {
     }
 
     public static void updatePlayOrPauseMusicBtn(boolean flag) {
-        playOrPauseMusicBtn.setText(!flag ? "▶" : "⏸");
+        ImageView imageView = new ImageView(new Image(flag ? "file:icons/pause.png" : "file:icons/play.png"));
+        playOrPauseMusicBtn.setGraphic(imageView);
     }
 
     public static void updateProgressBar(String currentPlay, String endPlay, double progress) {
