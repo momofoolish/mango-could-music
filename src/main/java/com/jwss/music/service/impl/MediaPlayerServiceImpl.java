@@ -1,5 +1,7 @@
 package com.jwss.music.service.impl;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.swing.DesktopUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import com.jwss.music.entity.AppContext;
@@ -17,6 +19,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -138,9 +141,14 @@ public class MediaPlayerServiceImpl implements IMediaPlayerService {
                         // 删除本地文件
                         musicImportService.batchRemove(ls, DeleteMusicType.REMOVE_LOCAL);
                     });
+
+                    MenuItem itemOpenFolder = new MenuItem("打开所在目录");
+                    itemDeleteFile.setOnAction(itemDeleteFileEvent -> {
+                        // todo 打开所在目录
+                    });
                     // 菜单容器
                     ContextMenu contextMenu = new ContextMenu();
-                    contextMenu.getItems().addAll(itemPlay, itemRemove, itemDeleteFile);
+                    contextMenu.getItems().addAll(itemPlay, itemOpenFolder, itemRemove, itemDeleteFile);
                     contextMenu.show(AppContext.getStage(), event.getScreenX(), event.getScreenY());
                 }
             });

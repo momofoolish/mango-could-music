@@ -8,38 +8,38 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Label?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jwss.music.MainController">
-    <left>
-        <VBox minWidth="210">
-            <Button minWidth="205" onMouseClicked="#onImportMusicClick" text="导入音乐" />
-            <Button minWidth="205" onMouseClicked="#onImportMusicClickByFolder" text="导入本地乐库" />
-            <Button minWidth="205" onMouseClicked="#onImportMusicClickByShare" text="导入分享乐库" />
-        </VBox>
-    </left>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jwss.music.MainController" styleClass="container">
+    <top>
+        <HBox spacing="1" styleClass="top-button-box">
+            <Button styleClass="top-option-button button" onMouseClicked="#onImportMusicClick" text="导入音乐"/>
+            <Button styleClass="top-option-button button" onMouseClicked="#onImportMusicClickByFolder" text="导入本地乐库"/>
+            <Button styleClass="top-option-button button" onMouseClicked="#onImportMusicClickByShare" text="导入分享乐库"/>
+        </HBox>
+    </top>
 
     <center>
-        <TableView fx:id="musicTableView">
+        <TableView styleClass="center-table" fx:id="musicTableView">
             <columns>
-                <TableColumn fx:id="nameTableColumn" text="标题" minWidth="250"/>
-                <TableColumn fx:id="authorTableColumn" text="歌手" minWidth="120"/>
-                <TableColumn fx:id="albumTableColumn" text="专辑" minWidth="200"/>
-                <TableColumn fx:id="durationTableColumn" text="时长" minWidth="100"/>
-                <TableColumn fx:id="sizeTableColumn" text="大小" minWidth="100"/>
+                <TableColumn fx:id="nameTableColumn" text="标题"/>
+                <TableColumn fx:id="authorTableColumn" text="歌手"/>
+                <TableColumn fx:id="albumTableColumn" text="专辑"/>
+                <TableColumn fx:id="durationTableColumn" text="时长"/>
+                <TableColumn fx:id="sizeTableColumn" text="大小"/>
             </columns>
         </TableView>
     </center>
 
     <bottom>
-        <VBox>
-            <HBox alignment="center" spacing="10">
-                <Button onMouseClicked="#onPreview" text="⏮"/>
-                <Button onMouseClicked="#onPlayOrPause" fx:id="playOrPauseMusicBtn" text="▶"/>
-                <Button onMouseClicked="#onNext" text="⏭"/>
+        <VBox styleClass="bottom">
+            <HBox styleClass="bottom-control" alignment="center" spacing="10">
+                <Button styleClass="button" onMouseClicked="#onPreview" text="⏮"/>
+                <Button styleClass="button" onMouseClicked="#onPlayOrPause" fx:id="playOrPauseMusicBtn" text="▶"/>
+                <Button styleClass="button" onMouseClicked="#onNext" text="⏭"/>
             </HBox>
-            <HBox alignment="center">
-                <Label text="00:12" fx:id="currentPlayLabel"/>
-                <ProgressBar minWidth="300" fx:id="musicPlayProgress" progress="0.00"/>
-                <Label text="04:12" fx:id="endPlayLabel"/>
+            <HBox styleClass="bottom-progress" alignment="center" spacing="6">
+                <Label text="00:12" fx:id="currentPlayLabel" styleClass="current-play-label"/>
+                <ProgressBar fx:id="musicPlayProgress" styleClass="music-play-progress" progress="0.00"/>
+                <Label text="04:12" fx:id="endPlayLabel" styleClass="end-play-label"/>
             </HBox>
         </VBox>
     </bottom>

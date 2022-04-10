@@ -36,8 +36,6 @@ public class MainController {
     private TableColumn<Music, String> durationTableColumn;
     @FXML
     private TableColumn<Music, String> sizeTableColumn;
-    @FXML
-    private TableColumn<Music, String> idTableColumn;
 
     @FXML
     private ProgressBar musicPlayProgress;
@@ -107,11 +105,25 @@ public class MainController {
      */
     @FXML
     protected void initialize() {
+        // 绑定列值
         nameTableColumn.setCellValueFactory(cell -> cell.getValue().nameProperty());
         authorTableColumn.setCellValueFactory(cell -> cell.getValue().authorProperty());
         albumTableColumn.setCellValueFactory(cell -> cell.getValue().albumProperty());
         durationTableColumn.setCellValueFactory(cell -> cell.getValue().durationProperty());
         sizeTableColumn.setCellValueFactory(cell -> cell.getValue().sizeProperty());
+        // 设置宽度百分比
+        nameTableColumn.prefWidthProperty().bind(musicTableView.widthProperty().multiply(0.2));
+        authorTableColumn.prefWidthProperty().bind(musicTableView.widthProperty().multiply(0.3));
+        albumTableColumn.prefWidthProperty().bind(musicTableView.widthProperty().multiply(0.3));
+        durationTableColumn.prefWidthProperty().bind(musicTableView.widthProperty().multiply(0.1));
+        sizeTableColumn.prefWidthProperty().bind(musicTableView.widthProperty().multiply(0.092));
+        // 设置不可以更改大小
+        nameTableColumn.setResizable(false);
+        authorTableColumn.setResizable(false);
+        albumTableColumn.setResizable(false);
+        durationTableColumn.setResizable(false);
+        sizeTableColumn.setResizable(false);
+
         // 加载本地音乐
         renderTableView(cacheService.getMusicList());
         // 加载需要观察的对象

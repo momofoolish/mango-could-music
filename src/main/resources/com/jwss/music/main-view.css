@@ -1,3 +1,69 @@
-#playerControlBox {
-    background-color: cadetblue;
+/*全局样式*/
+.button {
+    -fx-border-color: #FB99A7;
+    -fx-text-fill: #FB99A7;
+    -fx-background-color: white;
+    -fx-cursor: pointer;
+}
+
+.button:hover {
+    -fx-background-color: #FB99A7;
+    -fx-text-fill: white;
+}
+
+.progress-bar .bar {
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-color: linear-gradient(to right, #fb7299 0%, rgb(246, 90, 134) 70%);
+}
+
+.progress-bar {
+    -fx-background-color: rgba(239, 239, 239);
+    -fx-border-color: rgba(239, 239, 239);
+    -fx-background-radius: 3px;
+    -fx-padding: 1px;
+}
+
+/*最外层*/
+.container {
+    -fx-background-color: white;
+}
+
+/*顶层*/
+.top-button-box {
+    -fx-alignment: center;
+    -fx-padding: 3px;
+    -fx-spacing: 6;
+}
+
+.top-option-button {
+    -fx-min-height: 32px;
+    -fx-min-width: 72px;
+}
+
+/*中间层*/
+.center-table {
+    -fx-background-color: white;
+}
+
+/*底层*/
+.bottom {
+    -fx-padding: 10px;
+}
+
+.bottom-progress {
+    -fx-padding: 10px 0 0 0;
+}
+
+.bottom-progress {
+    /*-fx-margin: 1em 1em;*/
+}
+
+.music-play-progress {
+    -fx-min-width: 480px;
+    -fx-max-height: 6px;
+}
+
+.current-play-label, .end-play-label {
+    -fx-font-size: 10px;
+    -fx-text-fill: rgb(73, 73, 73);
 }
