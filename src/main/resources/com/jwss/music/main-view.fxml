@@ -10,13 +10,13 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jwss.music.MainController" styleClass="container">
     <top>
-        <HBox spacing="1" styleClass="top-button-box">
+        <HBox fx:id="topHBox" spacing="1" styleClass="top-button-box">
             <Button styleClass="top-option-button" fx:id="simpleImportButton" onMouseClicked="#onImportMusicClick"
                     text="文件导入"/>
             <Button styleClass="top-option-button" fx:id="folderImportButton"
                     onMouseClicked="#onImportMusicClickByFolder" text="文件夹导入"/>
-            <Button styleClass="top-option-button" fx:id="webImportButton" onMouseClicked="#onImportMusicClickByShare"
-                    text="外部导入"/>
+            <!--<Button styleClass="top-option-button" fx:id="webImportButton" onMouseClicked="#onImportMusicClickByShare"-->
+            <!--        text="外部导入"/>-->
         </HBox>
     </top>
 

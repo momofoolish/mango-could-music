@@ -2,6 +2,7 @@ package com.jwss.music;
 
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
+import com.jwss.component.button.JuButton;
 import com.jwss.music.entity.AppContext;
 import com.jwss.music.entity.Music;
 import com.jwss.music.factory.ServiceFactory;
@@ -12,10 +13,13 @@ import com.jwss.music.service.IMediaPlayerService;
 import com.jwss.music.service.IMusicImportService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 
 import java.util.List;
 
@@ -25,6 +29,9 @@ import java.util.List;
  */
 public class MainController {
     private static final Log logger = LogFactory.get();
+
+    @FXML
+    private HBox topHBox;
 
     @FXML
     private TableView<Music> musicTableView;
@@ -57,8 +64,8 @@ public class MainController {
     private Button simpleImportButton;
     @FXML
     private Button folderImportButton;
-    @FXML
-    private Button webImportButton;
+
+    private final JuButton webImportButton = new JuButton();
 
     private final IMediaPlayerService mediaPlayerService = ServiceFactory.getMediaPlayer();
     private final IMusicImportService musicImportService = ServiceFactory.getMusicImport();
@@ -81,12 +88,6 @@ public class MainController {
             renderTableView(musicList);
             cacheService.saveMusicList(musicList);
         }
-    }
-
-    @FXML
-    protected void onImportMusicClickByShare() {
-        // 导入外部分享乐库
-        musicImportService.importMusicByShare();
     }
 
     @FXML
@@ -141,7 +142,14 @@ public class MainController {
         ImageView webView = new ImageView(new Image("file:icons/web.png"));
         simpleImportButton.setGraphic(importView);
         folderImportButton.setGraphic(folderView);
+
         webImportButton.setGraphic(webView);
+        webImportButton.setText("订阅音乐");
+        webImportButton.setOnMouseClicked(event -> {
+            // 导入外部分享乐库
+            musicImportService.importMusicByShare();
+        });
+        topHBox.getChildren().add(webImportButton);
 
         // 播放器按钮
         ImageView playView = new ImageView(new Image("file:icons/play.png"));
